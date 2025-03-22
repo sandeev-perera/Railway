@@ -1,0 +1,186 @@
+.row {
+    display: flex;        
+    flex-direction: row;  
+    font-size: 30px;      
+    text-align: center;
+    column-gap: 15px;   
+ }
+    
+
+.sub-sec3{
+    width: 80%;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+}
+
+
+.sub-sec3 h1{
+    padding-top: 0%;
+    text-transform: capitalize;
+    text-align: left;
+    font-size: 50px;
+    color: #05445E;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;    
+}
+
+
+
+
+
+.ol1{
+    
+    text-align: left;
+    padding-left: 300px;
+    
+    
+}
+.ol1 li{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    justify-content: left;
+    margin-left: -20%;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 60px;
+}
+
+
+.ol2 a{
+    text-decoration: none;
+    color:#007b8f;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+
+.ol2 {
+
+    text-align: left;
+    padding-left: 25px;
+
+
+}
+
+.ol2 li {
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    justify-content: left;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 60px;
+
+}
+
+.col .supportimg {
+    width: 60%;
+    padding: 10px;
+    margin-left: 100px;
+    flex: 50%;
+    border-radius: 50px;
+
+}
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column; /* Change to column on mobile */
+    }
+    .col .supportimg {
+        margin-top: 20px;
+        margin-right: 90px;
+        margin-left: 90px;
+        width: 90%;
+    }
+    #feedback-btn {
+        background-color: #0097a7;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        
+    }
+
+    .content p {
+        margin: px auto;
+        font-weight: bold;
+        align-items: center;
+        font-size: 12px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    @media screen and (max-width: 768px) {
+
+
+        .ol2 {
+            padding-left: 0; /* Remove unnecessary left padding */
+            max-width: 85%; /* Keep the list width balanced */
+            margin: 0 auto; /* Center the list */
+            margin-left: 50px;
+            
+            text-align: left; /* Left-align text for better readability */
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Add spacing between list items */
+        }
+    
+        .ol2 li {
+            font-size: 16px; /* Decrease font size for better mobile fit */
+            line-height: 26px; /* Improve readability */
+            text-align: justify; /* Justify text alignment */
+            padding: 10px 15px; /* Add padding for better spacing */
+            background-color: #f8f8f8; /* Light background for better contrast */
+            border-radius: 8px; /* Rounded corners for a neat look */
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for better readability */
+        }
+    }
+}
+
+
+
+h1 {
+    color: #004b66;
+    font-size: 24px;
+    margin-bottom: 50px;
+}
+
+
+.feedback-frm{
+    margin-left:auto;
+}
+
+#lbl1 {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    display: block;
+    margin: 10px 0 5px;
+    text-align: left;
+}
+
+.input1, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-right: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #e0f7fa;
+}
+
+#feedback-btn {
+    background-color: #0097a7;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    
+}
+
+#feedback-btn:hover {
+    background-color: #007b8f;
+}

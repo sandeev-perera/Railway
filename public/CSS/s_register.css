@@ -1,0 +1,228 @@
+/* .sticketform {
+    width: 700px;
+    
+    padding: 50px;
+    margin: 60px 560px;
+    
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #8f8f8f;
+    background-color:#e0f7fa;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+} 
+
+.radio-group {
+    display: inline-block;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.s_title{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+.s_btn{
+    background-color: #0097a7;
+    cursor: pointer;
+    margin-top: 30px;
+
+}
+
+.s_btn:hover {
+    background-color: #007b8f;
+} */
+
+    .alert-success-custom {
+        background-color: #d1e7dd;
+        color: #0f5132;
+        border-left: 5px solid #198754;
+        padding: 15px 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .alert-danger-custom {
+        background-color: #f8d7da;
+        color: #842029;
+        border-left: 5px solid #dc3545;
+        padding: 15px 20px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-weight: 500;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .error-list {
+        padding: 0;
+        margin-top: 15px;
+        list-style: none;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .error-list li {
+        color: #dc3545;
+        background-color: #f8d7da;
+        padding: 8px 12px;
+        border-radius: 4px;
+        margin-bottom: 5px;
+        font-size: 15px;
+        border-left: 4px solid #dc3545;
+    }
+
+    .form-section {
+        max-width: 700px;
+        margin: 0 auto;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-section h2 {
+        text-align: center;
+        font-weight: 600;
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+.sticketform {
+    width: 700px;
+    padding: 50px;
+    margin: 60px auto; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Label Styling */
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Input & Select Styling */
+input,
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #8f8f8f;
+    background-color: #e0f7fa;
+    border-radius: 4px;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Title Styling */
+.s_title {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    margin-bottom: 70px;
+}
+
+/* Button Class for Submit */
+.s_btn {
+    background-color: #0097a7;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.s_btn:hover {
+    background-color: #007b8f;
+}
+
+/* Radio group (if needed) */
+.radio-group {
+    display: inline-block;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .sticketform {
+        width: 85%;  /* Adjust width for mobile */
+        padding: 30px;
+        margin: 20px auto;  /* Center the form */
+    }
+
+    .s_title {
+        margin-bottom: 40px;  /* Adjust space for smaller screens */
+    }
+
+    button {
+        font-size: 14px;  /* Adjust button font size */
+    }
+
+    input, select {
+        font-size: 14px;  /* Adjust input font size */
+    }
+
+    label {
+        font-size: 14px;  /* Adjust label font size */
+
+    }
+
+    /* Additional mobile styling */
+    .form-control {
+        font-size: 14px;  /* Make form inputs smaller */
+    }
+}
