@@ -37,6 +37,7 @@ return new class extends Migration
             $table->string('province');
             $table->string('occupation');
             $table->string('occupation_address');
+            $table->enum("occupation_sector", ["government", "private"]);
             $table->string('home_station');
             $table->string('work_station');
             $table->string('photo');

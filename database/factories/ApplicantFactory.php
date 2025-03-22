@@ -29,6 +29,7 @@ class ApplicantFactory extends Factory
             'province' => $this->faker->state,
             'occupation' => $this->faker->jobTitle,
             'occupation_address' => $this->faker->address,
+            'occupation_sector' => rand(0,1) ? "private": "government",
             'home_station' => $this->faker->city,
             'work_station' => $this->faker->city,
             'photo' => 'uploads/photos/' . $this->faker->uuid . '.jpg',

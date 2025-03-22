@@ -82,6 +82,7 @@ class ApplicantController extends Controller
                 'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya'
             ])],                    
             'occupation' => 'required|string|max:50',
+            'occupation_sector' =>['required' , Rule::in(["government", "private"])],
             'occupation_address' => 'required|string|max:250',
             'home_station' => 'required|string|max:50',
             'work_station' => 'required|string|max:50',

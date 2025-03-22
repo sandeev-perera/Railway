@@ -26,16 +26,9 @@
                 </div>
             </div> --}}
             <div>
-                <label class="block font-semibold">Sector</label>
-                <div class="flex space-x-4">
-                    <label class="flex items-center space-x-2">
-                        <input type="radio" name="sector" value="government" checked>
-                        <span>Government</span>
-                    </label>
-                    <label class="flex items-center space-x-2">
-                        <input type="radio" name="sector" value="private">
-                        <span>Private</span>
-                    </label>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Sector</label>
+                <div class="px-4 py-2 bg-gray-100 text-gray-800 rounded-md shadow-sm inline-block font-semibold">
+                    {{ ucfirst(session('user')->occupation_sector) }}
                 </div>
             </div>
             <div>
@@ -78,7 +71,6 @@
             </div>
         </div>
         <div class="flex space-x-4 ">
-            <button type="reset" class="px-4 py-2 bg-gray-300 rounded-full cursor-pointer">Reset</button>
             <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Submit and Pay</button>
         </div>
     </form>

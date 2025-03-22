@@ -264,6 +264,19 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label d-block">Occupation Sector</label>
+        
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorGovernment" value="government" required>
+                <label class="form-check-label" for="sectorGovernment">Government</label>
+            </div>
+        
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorPrivate" value="private">
+                <label class="form-check-label" for="sectorPrivate">Private</label>
+            </div>
+        </div>
+        <div class="mb-3">
             <label class="form-label">Work Contact Optional</label>
             <input type="text" name="work_contact" class="form-control">
         </div>
