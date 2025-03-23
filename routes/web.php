@@ -20,6 +20,7 @@ Route::view("/support","support")->name("show.support");
 Route::controller(AuthController::class)->group(function(){
     Route::get('/login', 'index')->name('show.login');
     Route::post("/login/user", "login")->name("user.login");
+    Route::get('/logout', 'logout')->name("user.logout");
 });
 
 Route::controller(ApplicantController::class)->group(function(){

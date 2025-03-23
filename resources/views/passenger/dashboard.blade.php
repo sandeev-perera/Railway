@@ -73,10 +73,6 @@
         <h3 class="font-bold">Selected Route</h3>
         <p class="text-lg mt-2 font-bold">Colombo - Kandy</p>
     </div> --}}
-
-    <h1>Welcome, {{ session('user')->full_name }}</h1>
-    <p>Email: {{ session('user')->email }}</p>
-
 </div>
 
 

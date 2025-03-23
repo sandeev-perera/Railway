@@ -12,7 +12,7 @@
         <h1>Welcome to<span class="tng">Tap and Go</span></h1>
         <p>Tap and Go - Smart, fast, and hassle-free seasonal ticketing.<br> Just tap, travel, and enjoy the ride!</p>
         <a href="{{route("application")}}"><button type="button" class="btn1">Register</button></a>
-        <a href="{{route("show.login")}}"><button type="button" class="btn1">Log In</button></a>
+        {{-- <a href="{{route("show.login")}}"><button type="button" class="btn1">Log In</button></a> --}}
 
 
 </section>

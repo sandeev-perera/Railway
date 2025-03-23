@@ -23,8 +23,15 @@
                 <li><a href="{{route("show.index")}}">Home</a></li>
                 <li><a href="{{route("show.aboutus")}}">About Us</a></li>
                 <li><a href="{{route("show.support")}}">Support</a></li>
-                <li><a href="user_dashboard">User Dashboard</a></li>
+                @if (session()->has("role"))
+                 @if (in_array(session("role"), ['applicant', 'passenger']))
+                    <li><a href="{{route('show.passenger.dashboard')}}">User Dashboard</a></li>
+                    @elseif (session("role")== "admin")
+                    <li><a href="{{route('admin.dashboard')}}">Admin Dashboard</a></li>
+                    @endif
+                @else
                 <li><a href="{{route("show.login")}}" class="login">Login</a></li>
+                @endif
             </ul>
 
             <!-- Hamburger Menu Icon (Only on Mobile) -->

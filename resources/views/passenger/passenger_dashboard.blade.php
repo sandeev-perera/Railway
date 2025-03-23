@@ -12,7 +12,9 @@
     <div class="flex">
         <aside class="bg-[#05445E] text-white w-64 min-h-screen fixed left-0 top-0 hidden md:block">
             <div class="p-6 text-center">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-16">
+                <a href="{{route('show.index')}}">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-16">
+                </a>
                 <h2 class="text-lg font-bold mt-2">Tap and Go</h2>
             </div>
             @if (session("user")->passenger)
@@ -43,15 +45,29 @@
     </button>
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-64 bg-[#05445E] text-white h-full transform -translate-x-full transition-all duration-1000 ease-in-out shadow-lg backdrop-blur-4xl">
         <button id="close-btn" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+        <a href="{{route('show.index')}}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-20">
+        </a>
+        @if (session("user")->passenger)
+            <nav class="mt-25 text-center">
+                <ul>
+                    <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
+                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li>
+                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="view_ticket">View Ticket</a></li>
+                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="cancel_season">Cancel Season</a></li>
+                </ul>
+            </nav>
+        @else
         <nav class="mt-25 text-center">
             <ul>
                 <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="support">Support</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="view_ticket">View Ticket</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="cancel_season">Cancel Season</a></li>
+                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="support">Buy Ticket</a></li>
             </ul>
         </nav>
+        @endif                                
+
+
+
     </div>
 </div>
 
@@ -73,7 +89,7 @@
                 <!-- Dropdown Menu -->
                 <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md overflow-hidden z-50">
                     <a data-page="edit_profile" href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 sidebar-link">Edit Profile</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    <a href="{{route('user.logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
                 </div>
             </div> 
         </div>

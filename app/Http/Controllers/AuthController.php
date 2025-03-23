@@ -23,11 +23,10 @@ class AuthController extends Controller
             9 => 'sabaragamuwa',
             10 => 'central',
         ];
-               
+
         return $roles[$role] ?? null;
     }
-
-
+    
     public function index(){
         return view("auth.login");
     }
@@ -71,6 +70,6 @@ class AuthController extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect()->route('show.login');
+        return redirect()->route('show.index');
     }
 }
