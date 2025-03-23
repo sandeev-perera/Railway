@@ -24,7 +24,7 @@ class AuthController extends Controller
             10 => 'central',
         ];
 
-        return $roles[$role] ?? null;
+        return $roles[$role] ?? "";
     }
     
     public function index(){
@@ -40,11 +40,10 @@ class AuthController extends Controller
     
         $credentials['email'] = strtolower($credentials['email']);
         // Check in Admin table
-        $admin = Admin::where('email', $credentials['email'])->first();
-        if ($admin && Hash::check($credentials['password'], $admin->password)) {
-            $provice = $this->getProvince($admin->adminrole);
-            session(['role' => 'admin', 'user' => $admin, "province" => $provice]);
-            return redirect()->route('admin.dashboard');
+        $admin = Admin::with('adminrole')->where('email', $credentials['email'])->first();        if ($admin && Hash::check($credentials['password'], $admin->password)) {
+            $provice = $this->getProvince($admin->admin_role_id);
+            session(['role' => 'admin', 'user' => $admin, "province" => $provice, "roleID" =>  $admin->admin_role_id,  'role_name' => $admin->adminrole->role_name]);
+            return redirect()->route('show.admin-portal');
         }
 
         // Check in Applicant table

@@ -9,7 +9,7 @@
         @if (session("role")== "passenger")
         <p class="text-gray-600 text-sm md:text-base text-center">Passenger ID : {{session("passengerID")}}</p>         
         @endif
-
+        
     </div>
     
     <!-- Support Section -->
@@ -31,15 +31,23 @@
     <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
         <div class="text-2xl">🎫</div>
         <h3 class="font-bold">Ticket Status</h3>
-        <p class="text-lg mt-2">Pending Payment</p>
-    </div>
+        @if (session('role') == "applicant")
+            <p class="text-lg mt-2">Pending Payment</p>
+        @else
+        <p class="text-lg mt-2">Active</p>
+        @endif
+        </div>
     
-    <!-- Upcoming Renewals -->
+    
+    @if (session('role') == "passenger")
     <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
         <div class="text-2xl">🔄</div>
         <h3 class="font-bold">Upcoming Renewals</h3>
         <p class="text-lg mt-2">14, May</p>
     </div>
+    @endif
+    <!-- Upcoming Renewals -->
+
     
     <!-- Selected Route -->
     <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
 use App\Services\ContactService;
@@ -18,9 +19,10 @@ class ApplicantController extends Controller
         $this->contactService = $contactService;
     }
 
-    public function index($data = [])
+    public function index()
     {
-        return view("applicants.application", ["values" => $data]);
+        $stations = Station::pluck("Location");
+        return view("applicants.application", compact("stations"));
     }
 
     private function getProvince(string $district): ?string
@@ -68,13 +70,13 @@ class ApplicantController extends Controller
 
     private function validationRules()
     {
+        $stationLocations = Station::pluck('location')->toArray();
         return [
             'full_name' => 'required|string|max:255',
             'nic' => 'required|string|max:13',
             'gender' => 'required|string',
-            'date_of_birth' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')],
-            'address' => 'required|string|max:50',
-        
+            'date_of_birth' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')] ,
+            'address' => 'required|string|max:50',       
             'district' => ['required', Rule::in([
                 'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle', 'Gampaha',
                 'Hambantota', 'Jaffna', 'Kalutara', 'Kandy', 'Kegalle', 'Kilinochchi', 'Kurunegala',
@@ -82,10 +84,10 @@ class ApplicantController extends Controller
                 'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya'
             ])],                    
             'occupation' => 'required|string|max:50',
-            'occupation_sector' =>['required' , Rule::in(["government", "private"])],
+            'occupation_sector' =>['required' , Rule::in(["government", "private"])] ,
             'occupation_address' => 'required|string|max:250',
-            'home_station' => 'required|string|max:50',
-            'work_station' => 'required|string|max:50',
+            'home_station' => ['required','string','max:50',Rule::in($stationLocations)] ,
+            'work_station' => ['required','string','max:50',Rule::in($stationLocations),'different:home_station'] ,
             'photo' => 'required|image|max:2048|mimes:png,jpeg,jpg',
             'source_of_proof' => 'required|mimes:pdf|max:2048',
             'email' => 'required|email|unique:applicants',
@@ -107,6 +109,9 @@ class ApplicantController extends Controller
             'photo.image' => 'Profile photo must be an image.',
             'photo.mimes' => 'Profile photo must be a PNG, JPEG, or JPG file.',
             'photo.max' => 'Profile photo size cannot exceed 2MB.',
+            'home_station.in' => 'Please select a valid home station.',
+            'work_station.in' => 'Please select a valid work station.',
+            'work_station.different' => 'Work station must be different from home station.',
             'source_of_proof.required' => 'Source of proof document is required.',
             'source_of_proof.mimes' => 'Only PDF files are allowed for proof documents.',
             'email.required' => 'Email is required.',

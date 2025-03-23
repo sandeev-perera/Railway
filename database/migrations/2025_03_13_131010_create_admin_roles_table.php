@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('admin_roles', function (Blueprint $table) {
             $table->id();
-            $table->string("Role_Name");
-            $table->string("Description");
+            $table->string("role_name");
+            $table->string("description");
         });
     }
 

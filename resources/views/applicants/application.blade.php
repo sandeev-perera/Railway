@@ -202,7 +202,7 @@
 
         <div class="mb-3">
             <label class="form-label">Address</label>
-            <input type="text" name="address" class="form-control mb-2" placeholder="No." required>
+            <input type="text" name="address" class="form-control mb-2" placeholder="No.188 Highlevel Road, Kirulapone" required>
             <select name="district" class="form-control mb-2" required>
                 <option value="Ampara">Ampara</option>
                 <option value="Anuradhapura">Anuradhapura</option>
@@ -282,13 +282,23 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Closest Station to Home</label>
-            <input type="text" name="home_station" class="form-control" required>
+            <label class="form-label">Select Station Location</label>
+            <select name="home_station" class="form-control" required>
+                <option value="" disabled selected>-- Select a station --</option>
+                @foreach($stations as $location)
+                    <option value="{{ $location }}">{{ $location }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Closest Station to Work</label>
-            <input type="text" name="work_station" class="form-control" required>
+            <label class="form-label">Select Station Location</label>
+            <select name="work_station" class="form-control" required>
+                <option value="" disabled selected>-- Select a station --</option>
+                @foreach($stations as $location)
+                    <option value="{{ $location }}">{{ $location }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="mb-3">

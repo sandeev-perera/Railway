@@ -27,7 +27,7 @@
                  @if (in_array(session("role"), ['applicant', 'passenger']))
                     <li><a href="{{route('show.passenger.dashboard')}}">User Dashboard</a></li>
                     @elseif (session("role")== "admin")
-                    <li><a href="{{route('admin.dashboard')}}">Admin Dashboard</a></li>
+                    <li><a href="{{route('show.admin-portal')}}">Admin Dashboard</a></li>
                     @endif
                 @else
                 <li><a href="{{route("show.login")}}" class="login">Login</a></li>
@@ -62,7 +62,6 @@
         const mobileMenu = document.querySelector(".mobile-menu");
         mobileMenu.classList.toggle("active");
     }
-        
     </script>
     <style>
 .header {

@@ -22,8 +22,9 @@ class Admin extends Model
     }
 
     public function adminrole(){
-        return $this->belongsTo(AdminRole::class);
-    }
+        //I have no freaking idea why this specific rellationship require a 2nd parameter to work.
+        //so better more about this
+        return $this->belongsTo(AdminRole::class, 'admin_role_id');}
 
     public function contacts()
     {

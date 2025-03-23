@@ -29,7 +29,9 @@ Route::controller(ApplicantController::class)->group(function(){
 });
 
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('show.admin-portal');
+Route::get('/admin/dashboard/page/{page}', [AdminController::class, 'loadPage'])->name("admin.dashboard.page");
+
 
 
 // Route::middleware(['check.role:admin'])->group(function () {

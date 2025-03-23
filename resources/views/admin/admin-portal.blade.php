@@ -1,36 +1,29 @@
-{{-- <!DOCTYPE html>
+@if (session("role") !== "admin")
+    {{abort(403)}}
+@endif
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
+    <title>Season Ticket Portal</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])   
 </head>
+
 <body class="bg-gray-100">
-
-    <!-- Sidebar -->
-
-    
     <div class="flex">
         <aside class="bg-[#05445E] text-white w-64 min-h-screen fixed left-0 top-0 hidden md:block">
             <div class="p-6 text-center">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-16">
+                <a href="{{route('show.index')}}">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-16">
+                </a>
                 <h2 class="text-lg font-bold mt-2">Tap and Go</h2>
             </div>
-            <nav class="mt-6 text-center">
-                <ul>
-                    <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="support">Supportssp</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="view_ticket">View Ticket</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="cancel_season">Cancel Season</a></li>
-                    
-                </ul>
-            </nav>
-        </aside>
-        
-
+                <nav class="mt-6 text-center">
+                    <x-admin-sidebar />
+                </nav>                                                   
+        </aside>       
 <!-- Mobile Sidebar -->
 <div class="md:hidden z-10">
     <button id="menu-btn" class="m-4 text-[#05445E]">
@@ -40,47 +33,43 @@
     </button>
     <div id="mobile-menu" class="hidden fixed top-0 left-0 w-64 bg-[#05445E] text-white h-full transform -translate-x-full transition-all duration-1000 ease-in-out shadow-lg backdrop-blur-4xl">
         <button id="close-btn" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+        <a href="{{route('show.index')}}">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-20">
+        </a>
+
         <nav class="mt-25 text-center">
-            <ul>
-                <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="support">Supportsss</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="view_ticket">View Ticket</a></li>
-                <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="cancel_season">Cancel Season</a></li>
-            </ul>
+            <x-admin-sidebar />
         </nav>
     </div>
 </div>
 
 
-
-
 <!-- Main Content -->
 <div class="ml-0 md:ml-64 flex-1 p-6">
     <div class="bg-[#75E6DA] p-4 text-[#05445E] font-bold text-xl text-center relative ">
-        DASHBOARD OVERVIEW
+        RAILWAY SEASON TICKET PORTAL
 
         <!-- Profile Section -->
         <div class="absolute top-1/2 right-4 transform -translate-y-1/2 ">
             <div class="relative">
                 <!-- Profile Icon -->
                 <button id="profile-btn" class="flex items-center space-x-1 bg-white p-1 rounded-full shadow-md focus:outline-none">
-                    <img src="{{ asset('images/user.jpg') }}" alt="Profile" class="w-10 h-10 rounded-full">
-                    <span class="hidden md:inline-block font-semibold text-sm text-[#05445E]">User</span>
+                    <img src="{{ asset('storage/'.session('user')->photo )}}" alt="Profile" class="w-10 h-10 rounded-full">
+                    <span class="hidden md:inline-block font-semibold text-sm text-[#05445E]">User </span>
                 </button>
 
                 <!-- Dropdown Menu -->
                 <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md overflow-hidden z-50">
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Edit Profile</a>
-                    <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    <a data-page="edit_profile" href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 sidebar-link">Edit Profile</a>
+                    <a href="{{route('user.logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
                 </div>
-            </div>
+            </div> 
         </div>
     </div>
 
     <!-- Content Section (Will be loaded dynamically) -->
     <div id="content" class="mt-6">
-        @include('passenger.dashboard') <!-- Default content -->
+        @include('admin.admin-dashboard') <!-- Default content -->
     </div>
 </div>
 
@@ -120,7 +109,7 @@ document.querySelectorAll('.sidebar-link').forEach(item => {
 
 // Function to load page content
 function loadPage(page) {
-    fetch(`/user_dashboard/pages/${page}`)
+    fetch('{{ route("admin.dashboard.page", ":page") }}'.replace(":page", page))
         .then(response => response.text())
         .then(data => {
             document.getElementById('content').innerHTML = data;
@@ -133,8 +122,8 @@ function loadPage(page) {
 
         // Sidebar toggle for mobile 
         const menuBtn = document.getElementById("menu-btn");
-    const closeBtn = document.getElementById("close-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
+        const closeBtn = document.getElementById("close-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
 
     // Open menu with animation
     menuBtn.addEventListener("click", () => {
@@ -169,8 +158,32 @@ function loadPage(page) {
             });
         }
 
-        // Get stored active page or default to "dashboard"
-        const currentPage = localStorage.getItem("activePage") || "dashboard";
+        // // Get stored active page or default to "dashboard"
+        // // Try to get active page from URL if loaded directly
+        // let currentUrl = window.location.href;
+        // let currentPage = "dashboard"; // default fallback
+
+        // //This is wrong for the Admin !!!!!!!
+        // if (currentUrl.includes("renew_ticket")) currentPage = "renew_ticket";
+        // else if (currentUrl.includes("support")) currentPage = "support";
+        // else if (currentUrl.includes("view_ticket")) currentPage = "view_ticket";
+        // else if (currentUrl.includes("cancel_season")) currentPage = "cancel_season";
+        // else if (currentUrl.includes("dashboard")) currentPage = "dashboard";
+        // else currentPage = localStorage.getItem("activePage") || "dashboard"; // fallback if URL doesn't match
+
+        // setActiveLink(currentPage);
+
+        let currentUrl = window.location.href;
+        let currentPage = "dashboard"; // fallback
+
+        if (currentUrl.includes("admin_mgmt")) currentPage = "admin-manager";
+        else if (currentUrl.includes("revenue")) currentPage = "revenue-manager";
+        else if (currentUrl.includes("validate_tickets")) currentPage = "ticket-validator";
+        else if (currentUrl.includes("applicant_mgmt")) currentPage = "applicant-manager";
+        else if (currentUrl.includes("passenger_mgmt")) currentPage = "passenger-manager";
+        else if (currentUrl.includes("dashboard")) currentPage = "admin-dashboard";
+        else currentPage = localStorage.getItem("activePage") || "admin-dashboard";
+
         setActiveLink(currentPage);
 
         // Add event listener to all links
@@ -189,7 +202,7 @@ function loadPage(page) {
 
         // Function to load page content dynamically (Optional)
         function loadPageContent(page) {
-            fetch(`/user_dashboard/pages/${page}`)
+            fetch('{{ route("admin.dashboard.page", ":page") }}'.replace(":page", page))
                 .then(response => response.text())
                 .then(html => {
                     document.getElementById("content-area").innerHTML = html;
@@ -197,7 +210,6 @@ function loadPage(page) {
                 .catch(error => console.error("Error loading page:", error));
         }
     });
-
 </script>
 </body>
-</html> --}}
+</html>
