@@ -6,7 +6,9 @@
         <p class="text-gray-600 text-sm md:text-base text-center">NIC : {{session("user")->nic}}</p>
         <p class="text-gray-600 text-sm md:text-base text-center">Email : {{session("user")->email}}</p>
         <p class="text-gray-600 text-sm md:text-base text-center">Applicant ID : {{session("user")->id}}</p>
-        <p class="text-gray-600 text-sm md:text-base text-center">Passenger ID : --</p>
+        @if (session("role")== "passenger")
+        <p class="text-gray-600 text-sm md:text-base text-center">Passenger ID : {{session("passengerID")}}</p>         
+        @endif
 
     </div>
     
@@ -28,8 +30,8 @@
     <!-- Active Tickets -->
     <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
         <div class="text-2xl">🎫</div>
-        <h3 class="font-bold">Active Tickets</h3>
-        <p class="text-lg mt-2">1</p>
+        <h3 class="font-bold">Ticket Status</h3>
+        <p class="text-lg mt-2">Pending Payment</p>
     </div>
     
     <!-- Upcoming Renewals -->

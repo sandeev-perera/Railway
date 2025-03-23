@@ -7,6 +7,6 @@
     <title>Admin Dashboard</title>
 </head>
 <body>
-    
+    <h1>This is the admin dashboards</h1>
 </body>
 </html>

@@ -16,13 +16,17 @@ Route::view("/", "index")->name("show.index");
 Route::view("/aboutus","aboutus")->name("show.aboutus");
 Route::view("/support","support")->name("show.support");
 
-Route::get('/login', [AuthController::class, 'index'])->name('show.login');
-Route::post("/login/user", [AuthController::class, "login"])->name("user.login");
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/login', 'index')->name('show.login');
+    Route::post("/login/user", "login")->name("user.login");
+});
 
 Route::controller(ApplicantController::class)->group(function(){
     Route::get("/application", "index")->name("application");
     Route::post('/application', 'store')->name('application.store');
 });
+
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
@@ -34,8 +38,6 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.d
 
 Route::get('/passenger/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
 Route::get('/passenger/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
-
-
 
 Route::prefix('/admin/applications')->controller(ApplicantsManagementController::class)->group(function () {
     Route::get('/{province}', 'index')->name('admin.applications.index');
@@ -49,10 +51,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';

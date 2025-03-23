@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id()->from(1000);
             $table->foreignIdFor(Station::class)->nullable()->constrained()->nullOnDelete();
-            $table->string("Full_Name");
+            $table->string("full_name");
             $table->foreignIdFor(AdminRole::class)->constrained();
             $table->string("email")->unique();
-            $table->string("Password");
+            $table->string("password");
             $table->timestamps();
         });
     }

@@ -15,16 +15,24 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-16">
                 <h2 class="text-lg font-bold mt-2">Tap and Go</h2>
             </div>
+            @if (session("user")->passenger)
+                <nav class="mt-6 text-center">
+                    <ul>
+                        <li class="p-4"><a href="" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="view_ticket">View Ticket</a></li>
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="cancel_season">Cancel Season</a></li>                   
+                    </ul>
+                </nav>
+                       
+            @else
             <nav class="mt-6 text-center">
                 <ul>
                     <li class="p-4"><a href="" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="support">Support</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="view_ticket">View Ticket</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="cancel_season">Cancel Season</a></li>
-                    
+                    <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="support">Buy Ticket</a></li>
                 </ul>
-            </nav>
+            </nav>             
+            @endif                                
         </aside>       
 <!-- Mobile Sidebar -->
 <div class="md:hidden z-10">

@@ -16,7 +16,6 @@ use App\Models\Contact;
 use App\Models\Passenger;
 use App\Models\Payment;
 use App\Models\Route;
-use App\Models\Station;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,13 +24,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Station::factory(10)->create();
+        $this->call([
+            StationSeeder::class,
+            AdminRoleSeeder::class,
+            AdminSeeder::class,
+        ]);
         // AdminRole::factory(10)->create();
         // Contact::factory(10)->create();
         // BarcodeScanner::factory(10)->create();
-        // Admin::factory(10)->create();       
-        Applicant::factory(10)->create();
-        Passenger::factory(10)->create();
+        // Admin::factory(10)->create();
+        // Applicant::factory(10)->create();
+        // Passenger::factory(10)->create();
         // Route::factory(10)->create();
         // CardConfig::factory(10)->create();
         // BarCodeCard::factory(10)->create();

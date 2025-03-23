@@ -23,11 +23,11 @@ class AuthController extends Controller
             9 => 'sabaragamuwa',
             10 => 'central',
         ];
-
+               
         return $roles[$role] ?? null;
     }
 
-    
+
     public function index(){
         return view("auth.login");
     }
@@ -38,8 +38,7 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
-        
+    
         $credentials['email'] = strtolower($credentials['email']);
         // Check in Admin table
         $admin = Admin::where('email', $credentials['email'])->first();
@@ -50,9 +49,19 @@ class AuthController extends Controller
         }
 
         // Check in Applicant table
-        $applicant = Applicant::where('email', $credentials['email'])->first();
-        if ($applicant && $applicant->status =="approved" && Hash::check($credentials['password'], $applicant->password)) {
-            session(['role' => 'applicant', 'user' => $applicant]);
+        $user = Applicant::where('email', $credentials['email'])->first();
+        if ($user && $user->status =="approved" && Hash::check($credentials['password'], $user->password)) {
+            // $role = $user->passenger ? "passenger" : "applicant";
+            $passengerID = null;
+            if($user->passenger){
+                $role = "passenger";
+                $passengerID = $user->passenger->id;
+            }
+            else{
+                $role = "applicant"; 
+
+            }
+            session(['role' => $role, 'user' => $user, "passengerID" => $passengerID]);
             return redirect()->route('show.passenger.dashboard');
         }
 
