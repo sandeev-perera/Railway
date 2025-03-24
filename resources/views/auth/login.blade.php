@@ -65,88 +65,50 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Tap & Go | Login</title>
 </head>
-<body>
-
-  <div class="flex min-h-screen items-center justify-center bg-gray-100 px-6 py-12">
-    <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+<body class="min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('images/ninearc.jpg');">
+  
+  <div class="flex min-h-screen items-center justify-center backdrop-blur-sm bg-black/40 px-4 py-12">
+    <div class="w-full max-w-md bg-white/90 rounded-2xl shadow-xl p-8 backdrop-blur-md">
       
       <div class="text-center mb-8">
-        <h2 class="text-3xl font-extrabold text-gray-800">Sign in to your account</h2>
-        <p class="mt-2 text-sm text-gray-500">Enter your credentials to continue</p>
+        <h2 class="text-2xl font-extrabold text-gray-900">Welcome</h2>
+        <p class="mt-2 text-sm text-gray-600">Sign in to continue</p>
       </div>
-  
+
       <form action="{{ route('user.login') }}" method="POST" class="space-y-6">
         @csrf
-  
+
         <!-- Email -->
         <div>
           <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-          <div class="mt-2">
-            <input type="email" name="email" id="email" required
-              class="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-sm">
-          </div>
+          <input type="email" name="email" id="email" required
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
           @if($errors->has('email'))
             <p class="text-sm text-red-600 mt-1">{{ $errors->first('email') }}</p>
           @endif
         </div>
-  
+
         <!-- Password -->
         <div>
           <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-          <div class="mt-2">
-            <input type="password" name="password" id="password" required
-              class="w-full rounded-md border border-gray-300 px-4 py-2 text-gray-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-sm">
-          </div>
+          <input type="password" name="password" id="password" required
+            class="mt-1 w-full rounded-lg border border-gray-300 px-4 py-2 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
           @if($errors->has('password'))
             <p class="text-sm text-red-600 mt-1">{{ $errors->first('password') }}</p>
           @endif
         </div>
-  
+
         <!-- Submit Button -->
         <div>
           <button type="submit"
-            class="w-full flex justify-center rounded-md bg-indigo-600 px-4 py-2 text-white font-semibold hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150">
+            class="w-full rounded-lg bg-indigo-600 px-4 py-2 font-semibold text-white hover:bg-indigo-500 transition duration-150 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             Sign in
           </button>
         </div>
       </form>
     </div>
   </div>
-  
-    {{-- <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Sign in to your account</h2>
-        </div>
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="{{route('user.login')}}" method="POST">
-            @csrf
-            <div>
-              <label for="email" class="block text-sm font-medium text-gray-900">Email address</label>
-              <div class="mt-2">
-                <input type="email" name="email" id="email" required
-                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 focus:outline-indigo-600">
-              </div>
-              @if($errors->has('email'))
-                <p class="text-sm text-red-600 mt-1">{{ $errors->first('email') }}</p>
-              @endif
-            </div>
-            
-            <div class="mt-4">
-              <label for="password" class="block text-sm font-medium text-gray-900">Password</label>
-              <div class="mt-2">
-                <input type="password" name="password" id="password" required
-                  class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 outline-gray-300 focus:outline-indigo-600">
-              </div>
-              @if($errors->has('password'))
-                <p class="text-sm text-red-600 mt-1">{{ $errors->first('password') }}</p>
-              @endif
-            </div>
-              <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Sign in</button>
-            </div>
-          </form>
-      
-        </div>
-      </div> --}}
+
 </body>
 </html>
 

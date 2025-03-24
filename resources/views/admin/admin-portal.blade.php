@@ -24,57 +24,57 @@
                     <x-admin-sidebar />
                 </nav>                                                   
         </aside>       
-<!-- Mobile Sidebar -->
-<div class="md:hidden z-10">
-    <button id="menu-btn" class="m-4 text-[#05445E]">
-        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-    </button>
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-64 bg-[#05445E] text-white h-full transform -translate-x-full transition-all duration-1000 ease-in-out shadow-lg backdrop-blur-4xl">
-        <button id="close-btn" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
-        <a href="{{route('show.index')}}">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-20">
-        </a>
 
-        <nav class="mt-25 text-center">
-            <x-admin-sidebar />
-        </nav>
-    </div>
-</div>
+    <div class="md:hidden z-10">
+        <button id="menu-btn" class="m-4 text-[#05445E]">
+            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+        </button>
+        <div id="mobile-menu" class="hidden fixed top-0 left-0 w-64 bg-[#05445E] text-white h-full transform -translate-x-full transition-all duration-1000 ease-in-out shadow-lg backdrop-blur-4xl">
+            <button id="close-btn" class="absolute top-4 right-4 text-white text-3xl">&times;</button>
+            <a href="{{route('show.index')}}">
+                <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-20">
+            </a>
 
-
-<!-- Main Content -->
-<div class="ml-0 md:ml-64 flex-1 p-6">
-    <div class="bg-[#75E6DA] p-4 text-[#05445E] font-bold text-xl text-center relative ">
-        RAILWAY SEASON TICKET PORTAL
-
-        <!-- Profile Section -->
-        <div class="absolute top-1/2 right-4 transform -translate-y-1/2 ">
-            <div class="relative">
-                <!-- Profile Icon -->
-                <button id="profile-btn" class="flex items-center space-x-1 bg-white p-1 rounded-full shadow-md focus:outline-none">
-                    <img src="{{ asset('storage/'.session('user')->photo )}}" alt="Profile" class="w-10 h-10 rounded-full">
-                    <span class="hidden md:inline-block font-semibold text-sm text-[#05445E]">User </span>
-                </button>
-
-                <!-- Dropdown Menu -->
-                <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md overflow-hidden z-50">
-                    <a data-page="edit_profile" href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 sidebar-link">Edit Profile</a>
-                    <a href="{{route('user.logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
-                </div>
-            </div> 
+            <nav class="mt-25 text-center">
+                <x-admin-sidebar />
+            </nav>
         </div>
     </div>
 
-    <!-- Content Section (Will be loaded dynamically) -->
-    <div id="content" class="mt-6">
-        @include('admin.admin-dashboard') <!-- Default content -->
+
+    <!-- Main Content -->
+    <div class="ml-0 md:ml-64 flex-1 p-6">
+        <div class="bg-[#75E6DA] p-4 text-[#05445E] font-bold text-xl text-center relative ">
+            RAILWAY SEASON TICKET PORTAL
+
+            <!-- Profile Section -->
+            <div class="absolute top-1/2 right-4 transform -translate-y-1/2 ">
+                <div class="relative">
+                    <!-- Profile Icon -->
+                    <button id="profile-btn" class="flex items-center space-x-1 bg-white p-1 rounded-full shadow-md focus:outline-none">
+                        <img src="{{ asset('storage/'.session('user')->photo )}}" alt="Profile" class="w-10 h-10 rounded-full">
+                        <span class="hidden md:inline-block font-semibold text-sm text-[#05445E]">User </span>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-md overflow-hidden z-50">
+                        <a data-page="edit-profile" href="" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 sidebar-link">Edit Profile</a>
+                        <a href="{{route('user.logout')}}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+
+        <!-- Content Section (Will be loaded dynamically) -->
+        <div id="content" class="mt-6">
+            @include('admin.admin-dashboard') <!-- Default content -->
+        </div>
     </div>
-</div>
 
 <!-- JavaScript to Handle Dropdown -->
-<script>
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
         const profileBtn = document.getElementById("profile-btn");
         const profileDropdown = document.getElementById("profile-dropdown");
@@ -90,7 +90,7 @@
             }
         });
     });
-</script>
+    </script>
 
 
 
@@ -140,7 +140,7 @@ function loadPage(page) {
         mobileMenu.classList.add("-translate-x-full");
         setTimeout(() => {
             mobileMenu.classList.add("hidden");
-        }, 500); // Wait for the animation to finish before hiding
+        }, 500);
     });     
 
 //Active link color change

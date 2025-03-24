@@ -282,7 +282,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Select Station Location</label>
+            <label class="form-label">Select Home Station Location</label>
             <select name="home_station" class="form-control" required>
                 <option value="" disabled selected>-- Select a station --</option>
                 @foreach($stations as $location)
@@ -292,7 +292,7 @@
         </div>
 
         <div class="mb-3">
-            <label class="form-label">Select Station Location</label>
+            <label class="form-label">Select Work Station Location</label>
             <select name="work_station" class="form-control" required>
                 <option value="" disabled selected>-- Select a station --</option>
                 @foreach($stations as $location)

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Applicant;
 use App\Models\Passenger;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ class AdminController extends Controller
     public function loadPage($page)
     {
         // List of valid pages to prevent unauthorized access
-        $validPages = ['admin-manager', 'applicant-manager', 'passenger-manager', 'revenue-manager', 'ticket-validator', 'admin-dashboard'];
+        $validPages = ['admin-manager', 'applicant-manager', 'passenger-manager', 'revenue-manager', 'ticket-validator', 'admin-dashboard', 'edit-profile'];
 
         if ($page === 'applicant-manager') {
             $province = session('province');
@@ -49,6 +50,19 @@ class AdminController extends Controller
             ->simplePaginate(30);
         
             return view('admin.passenger-manager', ['passengers' => $passengers]);
+        }
+
+        if ($page === 'admin-manager') {
+            //retrieve Card Details when Done
+            $admins = Admin::with([
+                'adminrole:id,role_name',
+                'station:station_id,Station_Name'
+            ])
+            ->select('id', 'full_name', 'email', 'admin_role_id', 'station_id') // include FK
+            ->orderBy('id', 'asc')
+            ->simplePaginate(30);
+        
+            return view('admin.admin-manager', ['admins' => $admins]);
         }
 
         // Check if the requested page is valid

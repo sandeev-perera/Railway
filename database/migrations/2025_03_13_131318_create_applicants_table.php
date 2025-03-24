@@ -32,7 +32,7 @@ return new class extends Migration
             $table->foreignIdFor(Admin::class)->nullable()->constrained();
             $table->enum('gender', ['Male', 'Female']);
             $table->date('date_of_birth');
-            $table->string('Address');
+            $table->string('address');
             $table->string('district');
             $table->string('province');
             $table->string('occupation');
