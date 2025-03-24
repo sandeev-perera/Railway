@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignIdFor(Station::class)->nullable()->constrained()->nullOnDelete();
             $table->string("full_name");
             $table->foreignIdFor(AdminRole::class)->constrained();
+            $table->string("photo")->default("uploads/profileImages/adminimages/setting.png");
             $table->string("email")->unique();
             $table->string("password");
             $table->timestamps();

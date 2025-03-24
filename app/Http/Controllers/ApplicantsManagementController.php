@@ -32,7 +32,8 @@ class ApplicantsManagementController extends Controller
                 ->simplePaginate(30);
         }
 
-        return view("admin.applications-admin", ["applicants" =>$pendingApplicants]);
+
+        return view('admin.applicant-manager', ["applicants" =>$pendingApplicants]);
     }
 
     public function show(Applicant $applicant) {
@@ -41,16 +42,26 @@ class ApplicantsManagementController extends Controller
 
     public function approve(Applicant $applicant)
     {
-    $applicant->update(['status' => 'approved']);
-    return redirect()->route('admin.applications.index', ['province' =>  $applicant->province])
-    ->with('success', 'Applicant Approved');
-    }
+        $applicant->update(['status' => 'approved']);
+
+        session()->flash('success', 'Applicant Approved');
+        session(['activePage' => 'applicant-manager', 'province' => session("province")]);
+        return redirect()->route('show.admin-portal');
+}
+
+    // $applicant->update(['status' => 'approved']);
+    // return redirect()->route('admin.applicant-manager', ['province' => session('province')])
+    // ->with('success', 'Applicant Approved');
+
 
     public function reject(Applicant $applicant)
     {
         $applicant->delete();
-        return redirect()->route('admin.applications.index', ['province' => $applicant->province])
-        ->with('success', 'Applicant Removed');
+        session()->flash('success', 'Applicant Rejected');
+        session(['activePage' => 'applicant-manager', 'province' => session("province")]);
+        return redirect()->route('show.admin-portal');
+        // return redirect()->route('admin.applications.index', ['province' => $applicant->province])
+        // ->with('success', 'Applicant Removed');
     }
     // public function approve(Applicant $applicant)
     // {

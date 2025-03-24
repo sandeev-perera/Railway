@@ -33,14 +33,15 @@ Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('show.ad
 Route::get('/admin/dashboard/page/{page}', [AdminController::class, 'loadPage'])->name("admin.dashboard.page");
 
 
-
 // Route::middleware(['check.role:admin'])->group(function () {
 //     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 // });
 
 
 Route::get('/passenger/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
+
 Route::get('/passenger/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
+Route::get('/admin/applicants/page/{province}', [AdminController::class, 'index'])->name('admin.applicant-manager');
 
 Route::prefix('/admin/applications')->controller(ApplicantsManagementController::class)->group(function () {
     Route::get('/{province}', 'index')->name('admin.applications.index');
