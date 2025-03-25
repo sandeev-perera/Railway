@@ -7,7 +7,12 @@
 @section('content')
 
 <section class="section1">
-
+    @if(session('success'))
+        <div class="alert-success-custom">
+            {{ session('success') }}
+        </div>
+    @endif
+    
     <div class="content">
         <h1>Welcome to<span class="tng">Tap and Go</span></h1>
         <p>Tap and Go - Smart, fast, and hassle-free seasonal ticketing.<br> Just tap, travel, and enjoy the ride!</p>

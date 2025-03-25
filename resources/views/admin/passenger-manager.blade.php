@@ -47,6 +47,6 @@
     </div>
 
     <div class="mt-6">
-        {{ $passengers->links() }}
+        {{-- {{ $passengers->links() }} --}}
     </div>
 </div>

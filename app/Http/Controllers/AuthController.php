@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Admin;
 use App\Models\Applicant;
 use Illuminate\Support\Facades\Hash;
@@ -11,6 +10,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     private function getProvince($role): string|null{
+        
         $roles = [
             1 => 'all',
             2 => 'eastern',

@@ -34,10 +34,10 @@ class AdminController extends Controller
             if ($province !== 'all') {
                 $query->where('province', $province);
             }
-    
+            
             $applicants = $query->select(['id', 'full_name', 'district', 'created_at'])
-                                ->orderBy('created_at', 'asc')
-                                ->simplePaginate(30);
+                                ->orderBy('created_at', 'asc')->get();
+                                //->simplePaginate(30);
     
             return view('admin.applicant-manager', ['applicants' => $applicants]);
         }
@@ -46,8 +46,8 @@ class AdminController extends Controller
             //retrieve Card Details when Done
             $passengers = Passenger::with(['Applicant:id,full_name,email'])
             ->select('id', 'applicant_id')
-            ->orderBy('id', 'asc')
-            ->simplePaginate(30);
+            ->orderBy('id', 'asc')->get();
+            //->simplePaginate(30);
         
             return view('admin.passenger-manager', ['passengers' => $passengers]);
         }
@@ -58,9 +58,9 @@ class AdminController extends Controller
                 'adminrole:id,role_name',
                 'station:station_id,Station_Name'
             ])
-            ->select('id', 'full_name', 'email', 'admin_role_id', 'station_id') // include FK
-            ->orderBy('id', 'asc')
-            ->simplePaginate(30);
+            ->select('id', 'full_name', 'email', 'admin_role_id', 'station_id')
+            ->orderBy('id', 'asc')->get();
+            //->simplePaginate(30);
         
             return view('admin.admin-manager', ['admins' => $admins]);
         }

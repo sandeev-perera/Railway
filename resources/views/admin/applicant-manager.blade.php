@@ -141,7 +141,7 @@
     </div>
 
     <div class="mt-6">
-        {{ $applicants->links() }}
+        {{-- {{ $applicants->links() }} --}}
     </div>
 </div>
 

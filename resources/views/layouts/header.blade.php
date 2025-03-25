@@ -71,6 +71,8 @@
     background-position: center;
     background-size: cover;
     position: relative;
+    
 }
 
     </style>
+

@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         // Contact::factory(10)->create();
         // BarcodeScanner::factory(10)->create();
         // Admin::factory(10)->create();
-        Applicant::factory(10)->create();
+        // Applicant::factory(10)->create();
         // Passenger::factory(10)->create();
         // Route::factory(10)->create();
         // CardConfig::factory(10)->create();

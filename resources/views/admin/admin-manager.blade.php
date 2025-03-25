@@ -45,6 +45,6 @@
     </div>
 
     <div class="mt-6">
-        {{ $admins->links() }}
+        {{-- {{ $admins->links() }} --}}
     </div>
 </div>

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\ApprovedMail;
+use App\Mail\RejectedMail;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class ApplicantsManagementController extends Controller
@@ -43,6 +46,9 @@ class ApplicantsManagementController extends Controller
     public function approve(Applicant $applicant)
     {
         $applicant->update(['status' => 'approved']);
+        $adminId = session('user')->id;
+        $applicant->update(['admin_id' => $adminId]);
+        Mail::to($applicant->email)->send(new ApprovedMail());
 
         session()->flash('success', 'Applicant Approved');
         session(['activePage' => 'applicant-manager', 'province' => session("province")]);
@@ -58,7 +64,10 @@ class ApplicantsManagementController extends Controller
     {
         $applicant->delete();
         session()->flash('success', 'Applicant Rejected');
+        Mail::to($applicant->email)->send(new RejectedMail());
+
         session(['activePage' => 'applicant-manager', 'province' => session("province")]);
+
         return redirect()->route('show.admin-portal');
         // return redirect()->route('admin.applications.index', ['province' => $applicant->province])
         // ->with('success', 'Applicant Removed');
@@ -69,19 +78,22 @@ class ApplicantsManagementController extends Controller
     //     return response()->json(['success' => true, 'message' => 'Applicant approved successfully!']);
     // }
 
-    public function updateStatus(Applicant $applicant, $action)
-    {
+    // public function updateStatus(Applicant $applicant, $action)
+    // {
 
-        if ($action === 'approve') {
-            $applicant->update( ['status' => 'approved']);
-        } elseif ($action === 'reject') {
-            $applicant->update(['status' => 'rejected']);
-        } else {
-            return response()->json(['success' => false, 'message' => 'Invalid action.'], 400);
-        }
+    //     if ($action === 'approve') {
 
-        return response()->json(['success' => true, 'message' => "Applicant $action successfully."]);
-    }
+    //         $applicant->update( ['status' => 'approved']);
+           
+
+    //     } elseif ($action === 'reject') {
+    //         $applicant->update(['status' => 'rejected']);
+    //     } else {
+    //         return response()->json(['success' => false, 'message' => 'Invalid action.'], 400);
+    //     }
+
+    //     return response()->json(['success' => true, 'message' => "Applicant $action successfully."]);
+    // }
 
     // public function reject(Applicant $applicant)
     // {

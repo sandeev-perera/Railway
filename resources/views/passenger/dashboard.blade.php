@@ -9,7 +9,6 @@
         @if (session("role")== "passenger")
         <p class="text-gray-600 text-sm md:text-base text-center">Passenger ID : {{session("passengerID")}}</p>         
         @endif
-        
     </div>
     
     <!-- Support Section -->
@@ -53,7 +52,7 @@
     <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
         <div class="text-2xl">📍</div>
         <h3 class="font-bold">Selected Route</h3>
-        <p class="text-lg mt-2 font-bold">Colombo - Kandy</p>
+        <p class="text-lg mt-2 font-bold">{{session('user')->home_station}} - {{session('user')->work_station}}</p>
     </div>
 </div>
 
