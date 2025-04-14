@@ -7,11 +7,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RegisterPassenger;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
 //     return view('index');
 // });
+
+
 Route::view("/", "index")->name("show.index");
 Route::view("/aboutus","aboutus")->name("show.aboutus");
 Route::view("/support","support")->name("show.support");
@@ -22,6 +25,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post("/login/user", "login")->name("user.login");
     Route::get('/logout', 'logout')->name("user.logout");
 });
+
 
 Route::controller(ApplicantController::class)->group(function(){
     Route::get("/application", "index")->name("application");
@@ -39,8 +43,8 @@ Route::get('/admin/dashboard/page/{page}', [AdminController::class, 'loadPage'])
 
 
 Route::get('/passenger/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
-
 Route::get('/passenger/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
+Route::post('/passenger/create/{applicant}', [RegisterPassenger::class,'RegisterPassengerWithOnlinePayment'])->name('passenger.register');
 Route::get('/admin/applicants/page/{province}', [AdminController::class, 'index'])->name('admin.applicant-manager');
 
 Route::prefix('/admin/applications')->controller(ApplicantsManagementController::class)->group(function () {

@@ -65,9 +65,9 @@
             <tr>
                 <th>Status</th>
                 <td>
-                    @if($applicant->status == 'pending')
+                    @if($applicant->status == 'Pending')
                         <span class="badge bg-warning text-dark">Pending</span>
-                    @elseif($applicant->status == 'approved')
+                    @elseif($applicant->status == 'Approved')
                         <span class="badge bg-success">Approved</span>
                     @else
                         <span class="badge bg-danger">Rejected</span>

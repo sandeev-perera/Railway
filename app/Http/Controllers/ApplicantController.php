@@ -21,7 +21,7 @@ class ApplicantController extends Controller
 
     public function index()
     {
-        $stations = Station::pluck("Location");
+        $stations = Station::pluck("station_name");
         return view("applicants.application", compact("stations"));
     }
 
@@ -70,7 +70,7 @@ class ApplicantController extends Controller
 
     private function validationRules()
     {
-        $stationLocations = Station::pluck('location')->toArray();
+        $stationLocations = Station::pluck('station_name')->toArray();
         return [
             'full_name' => 'required|string|max:255',
             'nic' => 'required|string|max:13',
@@ -84,7 +84,7 @@ class ApplicantController extends Controller
                 'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya'
             ])],                    
             'occupation' => 'required|string|max:50',
-            'occupation_sector' =>['required' , Rule::in(["government", "private"])] ,
+            'occupation_sector' =>['required' , Rule::in(["GOV", "PVT"])] ,
             'occupation_address' => 'required|string|max:250',
             'home_station' => ['required','string','max:50',Rule::in($stationLocations)] ,
             'work_station' => ['required','string','max:50',Rule::in($stationLocations),'different:home_station'] ,

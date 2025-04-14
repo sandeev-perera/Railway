@@ -17,11 +17,13 @@
                 </a>
                 <h2 class="text-lg font-bold mt-2">Tap and Go</h2>
             </div>
-            @if (session("user")->passenger)
+            @if (session("role")== "passenger")
                 <nav class="mt-6 text-center">
                     <ul>
                         <li class="p-4"><a href="" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>
+                        @if ($user->passenger->status == "Expired")
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>                   
+                        @endif
                         <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="view_ticket">View Ticket</a></li>
                         <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="cancel_season">Cancel Season</a></li>                   
                     </ul>
@@ -48,7 +50,7 @@
         <a href="{{route('show.index')}}">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="mx-auto w-20">
         </a>
-        @if (session("user")->passenger)
+        @if (session("role")== "passenger")
             <nav class="mt-25 text-center">
                 <ul>
                     <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
@@ -94,6 +96,20 @@
             </div> 
         </div>
     </div>
+
+    @if(session('success'))
+        <div class="alert-success-custom">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+                <ul class="error-list">
+                    @foreach ($errors->all() as $error )
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+    @endif
 
     <!-- Content Section (Will be loaded dynamically) -->
     <div id="content" class="mt-6">

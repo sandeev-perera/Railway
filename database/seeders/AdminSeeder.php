@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -69,7 +70,7 @@ class AdminSeeder extends Seeder
             $admin['created_at'] = now();
             $admin['updated_at'] = now();
         }
-
-        DB::table('admins')->insert($admins);
+        Admin::insert($admins);
+        // DB::table('admins')->insert($admins);
     }
 }

@@ -22,13 +22,13 @@ class ApplicantsManagementController extends Controller
         }
     
         if ($province === 'all') {
-            $pendingApplicants = Applicant::where('status', 'pending')
+            $pendingApplicants = Applicant::where('status', 'Pending')
                 ->select(['id', 'full_name', 'district', 'created_at'])
                 ->orderBy('created_at', 'asc')
                 ->simplePaginate(30);
         } else {
 
-            $pendingApplicants = Applicant::where('status', 'pending')
+            $pendingApplicants = Applicant::where('status', 'Pending')
                 ->where('province', $province)
                 ->select(['id', 'full_name', 'district', 'created_at'])
                 ->orderBy('created_at', 'asc')
@@ -45,7 +45,7 @@ class ApplicantsManagementController extends Controller
 
     public function approve(Applicant $applicant)
     {
-        $applicant->update(['status' => 'approved']);
+        $applicant->update(['status' => 'Approved']);
         $adminId = session('user')->id;
         $applicant->update(['admin_id' => $adminId]);
         Mail::to($applicant->email)->send(new ApprovedMail());

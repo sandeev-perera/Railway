@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('barcode_scanners', function (Blueprint $table) {
             $table->id()->from(4000);
             $table->foreignIdFor(Station::class)->nullable()->constrained()->cascadeOnDelete();
-            $table->enum("Scanner_Location", ["Entry", "Exit", "Standby"])->default("Standby");
+            $table->enum("scanner_location", ["Entry", "Exit", "Standby"])->default("Standby");
             $table->timestamps();
         });
 

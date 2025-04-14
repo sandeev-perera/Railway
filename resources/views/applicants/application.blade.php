@@ -268,12 +268,12 @@
         <label class="form-label d-block">Occupation Sector</label>
         
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorGovernment" value="government" required>
+                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorGovernment" value="GOV" required>
                 <label class="form-check-label" for="sectorGovernment">Government</label>
             </div>
         
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorPrivate" value="private">
+                <input class="form-check-input" type="radio" name="occupation_sector" id="sectorPrivate" value="PVT">
                 <label class="form-check-label" for="sectorPrivate">Private</label>
             </div>
 
@@ -291,16 +291,16 @@
      
     <option value="" disabled selected>-- Select a station --</option>
     <select name="home_station" class="form-control" required>
-        @foreach($stations as $location)
-            <option value="{{ $location }}">{{ $location }}</option>
+        @foreach($stations as $station_name)
+            <option value="{{ $station_name }}">{{ $station_name }}</option>
         @endforeach
     </select>
 
     <label for="work_station" class="form-label">Nearest Railway Station to Work <span style="color: red;">*</span></label> <!--Red star for the required fields-->
     <select name="work_station" class="form-control" id='work_station' required>
         <option value="" disabled selected>-- Select a station --</option>
-        @foreach($stations as $location)
-            <option value="{{ $location }}">{{ $location }}</option>
+        @foreach($stations as $station_name)
+            <option value="{{ $station_name }}">{{ $station_name }}</option>
         @endforeach
     </select>
 

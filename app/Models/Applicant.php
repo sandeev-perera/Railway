@@ -16,6 +16,8 @@ class Applicant extends Model
         return $this->hasOne(Passenger::class);
     }
 
+    
+
     public function admin(){
         return $this->belongsTo(Admin::class);
     }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applicant;
+
 class PassengerController extends Controller
 {
     public function showpassenger()
@@ -10,7 +12,8 @@ class PassengerController extends Controller
     if (!$passenger) {
         return redirect()->route('show.login')->with('error', 'Please login first.');
     }
-    return view("passenger.passenger_dashboard", ['passenger' => $passenger]);
+    $user = Applicant::with('passenger')->find(session('user')->id);
+    return view("passenger.passenger_dashboard", compact('user'));
 }
 
     public function loadPage($page)
@@ -20,7 +23,8 @@ class PassengerController extends Controller
 
         // Check if the requested page is valid
         if (in_array($page, $validPages)) {
-            return view('passenger.' . $page);
+            $user = Applicant::with('passenger')->find(session('user')->id);
+            return view('passenger.' . $page,compact('user'));
         }
         
         return response('Page not found', 404);

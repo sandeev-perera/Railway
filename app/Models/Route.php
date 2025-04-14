@@ -23,8 +23,5 @@ class Route extends Model
         return $this->belongsTo(Station::class, "end_station_id");
     }
 
-    public function cardConfigs(){
-        return $this->hasMany(CardConfig::class);
-    }
 
 }

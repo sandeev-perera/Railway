@@ -29,14 +29,14 @@ class ApplicantFactory extends Factory
             'province' => "North Central",
             'occupation' => $this->faker->jobTitle,
             'occupation_address' => $this->faker->address,
-            'occupation_sector' => rand(0,1) ? "private": "government",
+            'occupation_sector' => rand(0,1) ? "PVT": "GOV",
             'home_station' => "Anuradhapura",
             'work_station' => "North Central",
             'photo' => 'uploads/profileImages/ac6562b9-5a28-45f3-9722-c25a62126ba0.jpg',
             'source_of_proof' => 'uploads/pdfs/e125fc7f-749a-43af-bb40-1cb3bf450b54.pdf',
             'email' => $this->faker->unique()->safeEmail,
             'password' => bcrypt('1234567'),
-            "status" => "pending"
+            "status" => "Pending"
         ];
     }
 }

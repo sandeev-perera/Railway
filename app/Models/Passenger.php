@@ -19,14 +19,16 @@ class Passenger extends Model
     public function BarcodeCard(){
         return $this->hasOne(BarCodeCard::class);
     }
-    public function cardConfig(){
+
+    //make sure this is correct when testing later.
+    public function route(){
         return $this->hasOneThrough(
-            CardConfig::class,  
+            Route::class,  
             BarCodeCard::class,
             'passenger_id',     
             'id',               
             'id',               
-            'card_config_id'    
+            'route_id'    
         );
 }
 }

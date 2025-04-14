@@ -26,7 +26,7 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->id }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->full_name}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->adminrole->role_name}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{ optional($admin->station)->Station_Name ?? 'Not Assigned' }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{ optional($admin->station)->station_name ?? 'Not Assigned' }}</td>
 
                         {{-- <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->created_at }}</td> --}}
                         {{-- <td class="px-6 py-4">

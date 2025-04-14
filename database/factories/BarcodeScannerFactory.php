@@ -19,7 +19,7 @@ class BarcodeScannerFactory extends Factory
     {
         return [
             'station_id' => Station::factory(),
-            'Scanner_Location' => $this->faker->randomElement(['Entry', 'Exit', "Standby"]),
+            'scanner_location' => $this->faker->randomElement(['Entry', 'Exit', "Standby"]),
         ];
     }
 }

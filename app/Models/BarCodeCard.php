@@ -15,10 +15,6 @@ class BarCodeCard extends Model
         return $this->belongsTo(Passenger::class);
     }
 
-    public function cardConfig(){
-        return $this->belongsTo(CardConfig::class);
-    }
-
     public function payments(){
         return $this->hasMany(Payment::class);
     }

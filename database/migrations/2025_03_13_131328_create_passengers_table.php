@@ -9,15 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->id()->from(5000);
             $table->foreignIdFor(Applicant::class)->constrained()->cascadeOnDelete();
             $table->date("Registered_Date")->default(DB::raw('CURRENT_DATE'));
+            //holds the token for passenger Card;
+            $table->string("passenger_token", 36)->unique()->index();
+            $table->enum("status", ["Active", "Expired", "Suspended"]);
             $table->timestamps();
         });
     }

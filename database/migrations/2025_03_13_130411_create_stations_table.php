@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('stations', function (Blueprint $table) {
             $table->id();
-            $table->string("Station_Name");
-            $table->string("Location");
+            $table->string("station_name");
+            $table->string("location");
         });
     }
 

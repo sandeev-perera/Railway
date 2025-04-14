@@ -30,7 +30,7 @@ class AdminController extends Controller
                 abort(403);
             }
     
-            $query = Applicant::where('status', 'pending');
+            $query = Applicant::where('status', 'Pending');
             if ($province !== 'all') {
                 $query->where('province', $province);
             }
@@ -45,7 +45,7 @@ class AdminController extends Controller
         if ($page === 'passenger-manager') {
             //retrieve Card Details when Done
             $passengers = Passenger::with(['Applicant:id,full_name,email'])
-            ->select('id', 'applicant_id')
+            ->select('id', 'applicant_id', 'status')
             ->orderBy('id', 'asc')->get();
             //->simplePaginate(30);
         
@@ -56,7 +56,7 @@ class AdminController extends Controller
             //retrieve Card Details when Done
             $admins = Admin::with([
                 'adminrole:id,role_name',
-                'station:station_id,Station_Name'
+                'station:station_id,station_name'
             ])
             ->select('id', 'full_name', 'email', 'admin_role_id', 'station_id')
             ->orderBy('id', 'asc')->get();

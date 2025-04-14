@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             StationSeeder::class,
             AdminRoleSeeder::class,
             AdminSeeder::class,
+            RoutesSeeder::class
         ]);
         // AdminRole::factory(10)->create();
         // Contact::factory(10)->create();

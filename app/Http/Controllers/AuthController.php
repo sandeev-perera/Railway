@@ -49,7 +49,7 @@ class AuthController extends Controller
 
         // Check in Applicant table
         $user = Applicant::where('email', $credentials['email'])->first();
-        if ($user && $user->status =="approved" && Hash::check($credentials['password'], $user->password)) {
+        if ($user && $user->status =="Approved" && Hash::check($credentials['password'], $user->password)) {
             // $role = $user->passenger ? "passenger" : "applicant";
             $passengerID = null;
             if($user->passenger){
@@ -59,7 +59,7 @@ class AuthController extends Controller
             else{
                 $role = "applicant"; 
 
-            }
+            } 
             session(['role' => $role, 'user' => $user, "passengerID" => $passengerID]);
             return redirect()->route('show.passenger.dashboard');
         }

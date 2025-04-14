@@ -37,14 +37,14 @@ return new class extends Migration
             $table->string('province');
             $table->string('occupation');
             $table->string('occupation_address');
-            $table->enum("occupation_sector", ["government", "private"]);
+            $table->enum("occupation_sector", ["GOV", "PVT"]);
             $table->string('home_station');
             $table->string('work_station');
             $table->string('photo');
             $table->string('source_of_proof');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum("status", ["pending", "approved"]);
+            $table->enum("status", ["Pending", "Approved"]);
             $table->timestamps();
         
         });

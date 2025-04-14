@@ -6,7 +6,7 @@
             {{ session('success') }}
         </div>
     @endif
-
+    
     <div class="overflow-x-auto bg-white shadow-md rounded-lg">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-[#05445E] text-white">
@@ -27,8 +27,8 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->id }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->Applicant->full_name}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->Applicant->id }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Card</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">Status</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$passenger->BarcodeCard->id}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$passenger->status}}</td>
 
                         {{-- <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->created_at }}</td> --}}
                         {{-- <td class="px-6 py-4">

@@ -2,6 +2,7 @@
 
 use App\Models\CardConfig;
 use App\Models\Passenger;
+use App\Models\Route;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,10 +19,12 @@ return new class extends Migration
         Schema::create('bar_code_cards', function (Blueprint $table) {
             $table->id()->from(1000000);
             $table->foreignIdFor(Passenger::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(CardConfig::class)->constrained();
-            $table->enum("Ticket_Duration", ["M", "Q"]);
-            $table->date("Start_Date")->default(DB::raw('CURRENT_DATE'));
-            $table->date("End_Date");
+            $table->foreignIdFor(Route::class)->constrained();
+            $table->enum("class", ["1st", "2nd", "3rd"]);        
+            $table->enum("ticket_duration", ["M", "Q"]);
+            $table->decimal('price', 7, 2);
+            $table->date("start_date")->default(DB::raw('CURRENT_DATE'));
+            $table->date("expire_date");
             $table->timestamps();
         });
     }
