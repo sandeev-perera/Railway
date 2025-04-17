@@ -6,24 +6,6 @@ use Illuminate\Support\Str;
 
 abstract class Controller
 {
-
-    // protected function uploadfile($file, $folder)
-    // {
-    //     if (!$file) {
-    //         return null;
-    //     }
-
-    //     $fileName = Str::uuid() . '.' . $file->getClientOriginalExtension();
-
-    //     // Store file in `storage/app/public/uploads/{folder}`
-    //     $filePath = $file->storeAs('uploads/'.$folder , $fileName, 'public');
-
-    //     // Return the correct path for Blade
-    //     return $filePath;
-    // }
-
-
-
     protected function storeFile($file, $folder, $filePath): bool
 {
    if (!$file || !$filePath) {

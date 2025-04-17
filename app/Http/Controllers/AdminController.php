@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return view("admin.admin-portal");
+        $user = Admin::find(session('user'));
+        return view("admin.admin-portal", compact('user'));
     }
 
     public function loadPage($page)
@@ -67,7 +68,15 @@ class AdminController extends Controller
 
         // Check if the requested page is valid
         if (in_array($page, $validPages)) {
-            return view('admin.' . $page);
+            $user = Admin::find(session('user'));
+            if($page == "edit-profile"){
+                $numbers = $user->contacts->keyBy('type');
+                $personal_contact = $numbers['personal']->contact_value ?? '';
+                $lan_contact = $numbers['lan']->contact_value ?? '';
+                $work_contact = $numbers['work']->contact_value ?? '';
+                return view('admin.' . $page,compact('user', 'lan_contact', 'personal_contact', 'work_contact'));
+            }
+            return view('admin.' . $page, compact("user"));
         }        
         return response('Page not found', 404);
     }

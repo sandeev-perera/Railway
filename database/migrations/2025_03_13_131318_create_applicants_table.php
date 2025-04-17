@@ -13,19 +13,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('applicants', function (Blueprint $table) {
-            // $table->id()->from(5000000);
-            // // $table->string("NIC")->unique();
-            // $table->foreignIdFor(Admin::class)->nullable()->constrained();
-            // $table->string("Full_Name");
-            // $table->enum("Gender", ["Male", "Female"]);
-            // $table->date("Date_Of_Birth");
-            // $table->string("email")-> unique();
-            // $table->string("Address");
-            // $table->string("Photo");
-            // $table->string("Source_Of_Proof");
-            // $table->string("Password");
-            // $table->timestamps();
-
             $table->id()->from(5000000); // Start IDs from 1000
             $table->string('full_name');
             $table->string('nic')->unique();
@@ -46,7 +33,6 @@ return new class extends Migration
             $table->string('password');
             $table->enum("status", ["Pending", "Approved"]);
             $table->timestamps();
-        
         });
     }
 

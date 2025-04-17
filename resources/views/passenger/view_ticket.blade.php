@@ -4,8 +4,6 @@
     <p>View and manage your purchased tickets.</p>
 </div> --}}
 
-
-
 <div class="flex flex-col items-center space-y-8 my-22 max-w-full">
     
     <!-- Front Side -->
@@ -55,13 +53,8 @@
 <div class="p-6 bg-white rounded shadow text-center">
     <h2 class="text-lg font-bold mb-4">Passenger Barcode</h2>
 
-    {{-- Barcode --}} <div class="text_center w-[50%] m-auto">
+    <div class="text_center w-[50%] m-auto">
       {!! DNS1D::getBarcodeHTML($user->passenger->passenger_token, 'C128', 1.5, 80) !!}
 
     </div>
-
-    {{-- Readable Token --}}
-    {{-- <div class="mt-2 text-sm font-semibold tracking-widest">
-        {{ $passenger->passenger_token }}
-    </div> --}}
 </div>

@@ -35,7 +35,7 @@ class ContactService
         $contactData = [];
 
         if (isset($contacts['personal_contact']) && !empty($contacts['personal_contact'])) {
-            $contactData[] = ['type' => 'mobile', 'contact_value' => $contacts['personal_contact']];
+            $contactData[] = ['type' => 'personal', 'contact_value' => $contacts['personal_contact']];
         }
 
         if (isset($contacts['work_contact']) && !empty($contacts['work_contact'])) {
@@ -43,7 +43,7 @@ class ContactService
         }
 
         if (isset($contacts['lan_contact']) && !empty($contacts['lan_contact'])) {
-            $contactData[] = ['type' => 'home', 'contact_value' => $contacts['lan_contact']];
+            $contactData[] = ['type' => 'lan', 'contact_value' => $contacts['lan_contact']];
         }
 
         if (isset($contacts['station']) && !empty($contacts['station'])) {
@@ -53,5 +53,33 @@ class ContactService
         if (!empty($contactData)) {
             $contactable->contacts()->createMany($contactData);
         }
+    }
+
+    public function updateContacts($contacts, Model $contactable, $request_type="person"){
+        if($request_type == "person"){
+            $contactTypes = ['personal', 'work', 'lan'];
+        }
+        else{
+            $contactTypes = ["station"];
+        }
+
+        foreach ($contactTypes as $type) {
+            $field = "{$type}_contact";
+            $number = $contacts[$field] ?? null;
+
+            if ($number !== null) {
+                $contact = $contactable->contacts()->where('type', $type)->first();
+
+                if ($contact) {
+                    $contact->update(['contact_value' => $number]);
+                } else {
+                    $contactable->contacts()->create([
+                        'type' => $type,
+                        'contact_value' => $number,
+                    ]);
+                }
+            }
+        }
+
     }
 }

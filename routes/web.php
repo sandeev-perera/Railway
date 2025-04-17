@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminManagementController;
 use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicantsManagementController;
 use App\Http\Controllers\AuthController;
@@ -30,11 +31,16 @@ Route::controller(AuthController::class)->group(function(){
 Route::controller(ApplicantController::class)->group(function(){
     Route::get("/application", "index")->name("application");
     Route::post('/application', 'store')->name('application.store');
+    Route::put('/passenger/{applicant}/update', 'update')->name('passenger.update');
+
 });
 
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('show.admin-portal');
 Route::get('/admin/dashboard/page/{page}', [AdminController::class, 'loadPage'])->name("admin.dashboard.page");
+
+Route::put('/admin/{admin}/update', [AdminManagementController::class, 'update'])->name('admin.update');
+
 
 
 // Route::middleware(['check.role:admin'])->group(function () {
@@ -45,6 +51,7 @@ Route::get('/admin/dashboard/page/{page}', [AdminController::class, 'loadPage'])
 Route::get('/passenger/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
 Route::get('/passenger/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
 Route::post('/passenger/create/{applicant}', [RegisterPassenger::class,'RegisterPassengerWithOnlinePayment'])->name('passenger.register');
+Route::post('/passenger/renew/{passenger}', [PassengerController::class, 'renewPassenger'])->name('passenger.renew');
 Route::get('/admin/applicants/page/{province}', [AdminController::class, 'index'])->name('admin.applicant-manager');
 
 Route::prefix('/admin/applications')->controller(ApplicantsManagementController::class)->group(function () {

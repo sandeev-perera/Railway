@@ -84,7 +84,7 @@
             <div class="relative">
                 <!-- Profile Icon -->
                 <button id="profile-btn" class="flex items-center space-x-1 bg-white p-1 rounded-full shadow-md focus:outline-none">
-                    <img src="{{ asset('storage/'.session('user')->photo )}}" alt="Profile" class="w-10 h-10 rounded-full">
+                    <img src="{{ asset('storage/'.$user->photo )}}" alt="Profile" class="w-10 h-10 rounded-full">
                     <span class="hidden md:inline-block font-semibold text-sm text-[#05445E]">User </span>
                 </button>
 
@@ -97,11 +97,6 @@
         </div>
     </div>
 
-    @if(session('success'))
-        <div class="alert-success-custom">
-            {{ session('success') }}
-        </div>
-    @endif
 
     @if ($errors->any())
                 <ul class="error-list">

@@ -23,9 +23,9 @@ class OnlinePaymentRequest extends FormRequest
     {
         return [
             'class' => 'required|in:1st,2nd,3rd',
-    'ticket_duration' => 'required|in:M,Q',
-    'home_station' => ['required', 'string', 'exists:stations,station_name'],
-    'work_station' => ['required', 'string', 'exists:stations,station_name', 'different:start_station'],
+            'ticket_duration' => 'required|in:M,Q',
+            'home_station' => ['required', 'string', 'exists:stations,station_name'],
+            'work_station' => ['required', 'string', 'exists:stations,station_name', 'different:start_station'],
         ];
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('contactable_id');
             $table->string('contactable_type');
-            $table->enum('type', ['home', 'work', 'mobile', 'station']);
+            $table->enum('type', ['lan', 'work', 'personal', 'station']);
             $table->string('contact_value');
             $table->timestamps();
         });

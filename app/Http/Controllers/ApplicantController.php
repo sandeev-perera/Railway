@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
+use App\Models\Contact;
 use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -168,5 +169,33 @@ class ApplicantController extends Controller
         catch (\Exception $e) {
             return $this->redirectWithError($this->route, 'Unexpected Error Happened');
         }
+    }
+
+
+    public function update(Request $request, Applicant $applicant){
+
+        $data = $request->validate(
+            [
+            'address' => 'required|string|max:50',       
+            'district' => ['required', Rule::in([
+                'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle', 'Gampaha',
+                'Hambantota', 'Jaffna', 'Kalutara', 'Kandy', 'Kegalle', 'Kilinochchi', 'Kurunegala',
+                'Mannar', 'Matale', 'Matara', 'Monaragala', 'Mullaitivu', 'Nuwara Eliya', 'Polonnaruwa',
+                'Puttalam', 'Ratnapura', 'Trincomalee', 'Vavuniya'
+            ])],                    
+            'occupation' => 'required|string|max:50'
+            ]
+            );
+        $contacts = $this->contactService->validateContacts($request);
+
+        $applicant->update([
+            'address' => $data['address'],
+            'occupation' => $data['occupation'],
+            'district' => $data['district']
+        ]);
+
+        $this->contactService->updateContacts($contacts, $applicant);
+
+        return $this->redirectWithSuccess('show.passenger.dashboard', "Your Personal Details Has been Updated");
     }
 }
