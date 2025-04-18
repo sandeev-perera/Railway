@@ -4,285 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Applicant Details</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container mt-5">
-        <h2>Applicant Details</h2>
-        <table class="table table-bordered">
-            <tr>
-                <th>ID</th>
-                <td>{{ $applicant->id }}</td>
-            </tr>
-            <tr>
-                <th>Full Name</th>
-                <td>{{ $applicant->full_name }}</td>
-            </tr>
-            <tr>
-                <th>NIC</th>
-                <td>{{ $applicant->nic }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ $applicant->gender }}</td>
-            </tr>
-            <tr>
-                <th>Address</th>
-                <td>{{ $applicant->address}}</td>
-            </tr>
-            <tr>
-                <th>Date of Birth</th>
-                <td>{{ $applicant->date_of_birth}}</td>
-            </tr>
-            <tr>
-                <th>District</th>
-                <td>{{ $applicant->district }}</td>
-            </tr>
-            <tr>
-                <th>Province</th>
-                <td>{{ $applicant->province }}</td>
-            </tr>
-            <tr>
-                <th>Occupation</th>
-                <td>{{ $applicant->occupation}}</td>
-            </tr>
-            <tr>
-                <th>Occupation Address</th>
-                <td>{{ $applicant->occupation_address}}</td>
-            </tr>
-            <tr>
-                <th>Home Station</th>
-                <td>{{ $applicant->home_station}}</td>
-            </tr>
-            <tr>
-                <th>Work Station</th>
-                <td>{{ $applicant->work_station}}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ $applicant->email}}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>
-                    @if($applicant->status == 'Pending')
-                        <span class="badge bg-warning text-dark">Pending</span>
-                    @elseif($applicant->status == 'Approved')
-                        <span class="badge bg-success">Approved</span>
-                    @else
-                        <span class="badge bg-danger">Rejected</span>
-                    @endif
-                </td>
-            </tr>
-            <tr>
-                <th>Profile Image</th>
-                <td>
-                    <img src="{{ asset('storage/' . $applicant->photo) }}" alt="Applicant Photo" width="150">
-                </td>
-            </tr>
-        </table>
-        <iframe src="{{ asset('storage/' . $applicant->source_of_proof) }}" 
-style="width:600px; height:500px;" frameborder="0"></iframe>
-
-        <form action="{{ route('admin.applications.approve', ['applicant' => $applicant->id]) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-success">Approve</button>
-        </form>
-        
-        <form action="{{ route('admin.applications.reject', ['applicant' => $applicant->id]) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-danger">Reject</button>
-        </form>        
-    </div>
+<body class="bg-gray-100">
     
+
+    <div class="container mx-auto mt-10 px-4">
+       
+        <div class="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-8">
+            @if(session('error'))
+            <div class="bg-red-400 border border-red-400 text-white px-4 py-3 rounded mb-4">
+                {{ session('error') }}
+            </div>
+        @endif
+            <div class="flex flex-col md:flex-row gap-8 items-start">
+                <!-- Left Side: Profile Image -->
+                <div class="flex-shrink-0">
+                    <img src="{{ asset('storage/' . $applicant->photo) }}" alt="Applicant Photo" class="w-40 h-40 object-cover rounded-xl shadow">
+                </div>
+
+                <!-- Right Side: Key Details -->
+                <div class="flex-1 space-y-2">
+                    <h2 class="text-2xl font-bold text-gray-800">{{ $applicant->full_name }}</h2>
+                    <p><span class="font-semibold text-gray-700">NIC:</span> {{ $applicant->nic }}</p>
+                    <p><span class="font-semibold text-gray-700">Email:</span> {{ $applicant->email }}</p>
+                    <p>
+                        <span class="font-semibold text-gray-700">Status:</span>
+                        @if($applicant->status == 'Pending')
+                            <span class="inline-block bg-yellow-300 text-yellow-900 px-2 py-1 rounded ml-1">Pending</span>
+                        @elseif($applicant->status == 'Approved')
+                            <span class="inline-block bg-green-500 text-white px-2 py-1 rounded ml-1">Approved</span>
+                        @else
+                            <span class="inline-block bg-red-500 text-white px-2 py-1 rounded ml-1">Rejected</span>
+                        @endif
+                    </p>
+                </div>
+            </div>
+
+            <!-- Additional Info Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 text-gray-700 text-lg">
+                <p><span class="font-semibold">ID:</span> {{ $applicant->id }}</p>
+                <p><span class="font-semibold">Gender:</span> {{ $applicant->gender }}</p>
+                <p><span class="font-semibold">Date of Birth:</span> {{ $applicant->date_of_birth }}</p>
+                <p><span class="font-semibold">District:</span> {{ $applicant->district }}</p>
+                <p><span class="font-semibold">Province:</span> {{ $applicant->province }}</p>
+                <p><span class="font-semibold">Occupation:</span> {{ $applicant->occupation }}</p>
+                <p><span class="font-semibold">Address:</span> {{ $applicant->address }}</p>
+                <p><span class="font-semibold">Occupation Address:</span> {{ $applicant->occupation_address }}</p>
+                <p><span class="font-semibold">Home Station:</span> {{ $applicant->home_station }}</p>
+                <p><span class="font-semibold">Work Station:</span> {{ $applicant->work_station }}</p>
+            </div>
+
+            <!-- Source of Proof Document -->
+            <div class="mt-10">
+                <span class="font-semibold text-gray-700 block mb-2">Source of Proof:</span>
+                <iframe src="{{ asset('storage/' . $applicant->source_of_proof) }}" class="w-full h-96 rounded-lg border border-gray-300" frameborder="0"></iframe>
+            </div>
+
+            <!-- Approve Button -->
+            <form action="{{ route('admin.applications.approve', ['applicant' => $applicant->id]) }}" method="POST" class="inline-block mt-6">
+                @csrf
+                @method('PATCH')
+                <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700">Approve</button>
+            </form>
+
+            <!-- Hidden checkbox trigger -->
+            <label for="modal-toggle" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 cursor-pointer ml-2 mt-6 inline-block">Reject</label>
+            <input type="checkbox" id="modal-toggle" class="hidden peer">
+
+            <!-- Modal -->
+            <div class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden peer-checked:flex items-center justify-center">
+                <div class="bg-white max-w-2xl w-full p-8 rounded-3xl border border-[#05445E] shadow-xl">
+                    <h2 class="text-2xl font-bold mb-6 text-[#05445E] text-center">Rejection Reasons</h2>
+                    <form method="POST" action="{{ route('admin.applications.reject', ['applicant' => $applicant->id]) }}" class="space-y-4">
+                        @csrf
+                        @method('PATCH')
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="img" name="reasons[]" value="Unacceptable profile image" class="w-5 h-5 text-blue-600 border-gray-300">
+                                <label for="img" class="ml-3 text-gray-800">Unacceptable profile image</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="letter" name="reasons[]" value="Unacceptable letter" class="w-5 h-5 text-blue-600 border-gray-300">
+                                <label for="letter" class="ml-3 text-gray-800">Unacceptable letter</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="contact" name="reasons[]" value="Contact number not valid" class="w-5 h-5 text-blue-600 border-gray-300">
+                                <label for="contact" class="ml-3 text-gray-800">Contact Number is not valid</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="nic" name="reasons[]" value="NIC not valid" class="w-5 h-5 text-blue-600 border-gray-300">
+                                <label for="nic" class="ml-3 text-gray-800">NIC not valid</label>
+                            </div>
+                            <div>
+                                <label for="other" class="block mb-2 text-gray-700 font-medium">Other</label>
+                                <textarea id="other" name="other_reason" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring focus:ring-blue-300 resize-none"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex justify-between mt-6">
+                            <label for="modal-toggle" class="px-6 py-2 rounded bg-gray-600 text-white cursor-pointer hover:bg-gray-700">Cancel</label>
+                            <button type="submit" class="px-6 py-2 rounded bg-red-600 text-white hover:bg-red-700">Reject with Email</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
-
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Applicant Details</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>Applicant Details</h2>
-        <table class="table table-bordered">
-            <tr>
-                <th>ID</th>
-                <td>{{ $applicant->id }}</td>
-            </tr>
-            <tr>
-                <th>Full Name</th>
-                <td>{{ $applicant->full_name }}</td>
-            </tr>
-            <tr>
-                <th>NIC</th>
-                <td>{{ $applicant->nic }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ $applicant->gender }}</td>
-            </tr>
-            <tr>
-                <th>District</th>
-                <td>{{ $applicant->district }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>
-                    @if($applicant->status == 'pending')
-                        <span class="badge bg-warning text-dark">Pending</span>
-                    @elseif($applicant->status == 'approved')
-                        <span class="badge bg-success">Approved</span>
-                    @else
-                        <span class="badge bg-danger">Rejected</span>
-                    @endif
-                </td>
-            </tr>
-            <tr>
-                <th>Profile Image</th>
-                <td>
-                    <img src="{{ asset('storage/' . $applicant->photo) }}" alt="Applicant Photo" width="150">
-                </td>
-            </tr>
-        </table>
-        <iframe src="{{ asset('storage/' . $applicant->source_of_proof) }}" 
-style="width:600px; height:500px;" frameborder="0"></iframe>
-
-        <form action="{{ route('admin.applications.approve', ['applicant' => $applicant->id]) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-success">Approve</button>
-        </form>
-        
-        <form action="{{ route('admin.applications.reject', ['applicant' => $applicant->id]) }}" method="POST" style="display: inline;">
-            @csrf
-            @method('PATCH')
-            <button type="submit" class="btn btn-danger">Reject</button>
-        </form>
-
-
-        
-    </div>
-    
-</body>
-</html> --}}
-
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Applicant Details</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-</head>
-<body>
-    <div class="container mt-5">
-        <h2>Applicant Details</h2>
-        <table class="table table-bordered">
-            <tr>
-                <th>ID</th>
-                <td>{{ $applicant->id }}</td>
-            </tr>
-            <tr>
-                <th>Full Name</th>
-                <td>{{ $applicant->full_name }}</td>
-            </tr>
-            <tr>
-                <th>NIC</th>
-                <td>{{ $applicant->nic }}</td>
-            </tr>
-            <tr>
-                <th>Gender</th>
-                <td>{{ $applicant->gender }}</td>
-            </tr>
-            <tr>
-                <th>District</th>
-                <td>{{ $applicant->district }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>
-                    @if($applicant->status == 'pending')
-                        <span class="badge bg-warning text-dark">Pending</span>
-                    @elseif($applicant->status == 'approved')
-                        <span class="badge bg-success">Approved</span>
-                    @else
-                        <span class="badge bg-danger">Rejected</span>
-                    @endif
-                </td>
-            </tr>
-            <tr>
-                <th>Profile Image</th>
-                <td>
-                    <img src="{{ asset('storage/' . $applicant->photo) }}" alt="Applicant Photo" width="150">
-                </td>
-            </tr>
-        </table>
-        <iframe src="{{ asset('storage/' . $applicant->source_of_proof) }}" 
-style="width:600px; height:500px;" frameborder="0"></iframe>
-
-<button id="approve-btn" class="btn btn-success" data-id="{{ $applicant->id }}">Approve</button>
-<button id="reject-btn" class="btn btn-danger" data-id="{{ $applicant->id }}">Reject</button>
-
-<p id="status-message" class="mt-3 text-bold"></p>
-       
-    </div>
-
-    
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        function updateStatus(userId, action) {
-            fetch(`/admin/applications/${userId}/${action}`, {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-                    "Content-Type": "application/json"
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the status badge dynamically
-                    let statusBadge = document.querySelector("td span.badge");
-                    if (action === "approve") {
-                        statusBadge.className = "badge bg-success";
-                        statusBadge.textContent = "Approved";
-                    } else if (action === "reject") {
-                        statusBadge.className = "badge bg-danger";
-                        statusBadge.textContent = "Rejected";
-                    }
-    
-                    // Show success message
-                    document.getElementById("status-message").textContent = data.message;
-                    document.getElementById("status-message").style.color = "green";
-                } else {
-                    alert("Error: " + data.message);
-                }
-            })
-            .catch(error => console.error("Error:", error));
-        }
-    
-        document.getElementById("approve-btn").addEventListener("click", function() {
-            let userId = this.getAttribute("data-id");
-            updateStatus(userId, "approve");
-        });
-    
-        document.getElementById("reject-btn").addEventListener("click", function() {
-            let userId = this.getAttribute("data-id");
-            updateStatus(userId, "reject");
-        });
-    });
-    </script>
-
-</html> --}}
-

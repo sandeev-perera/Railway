@@ -16,9 +16,13 @@ class RejectedMail extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $applicant;
+    public $reasons;
+    
+    public function __construct($applicant, $reasons)
     {
-        //
+        $this->applicant = $applicant;
+        $this->reasons = $reasons;
     }
 
     /**

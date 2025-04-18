@@ -44,6 +44,10 @@ class RegisterPassenger extends Controller
             $endStationId = $stations->firstWhere('station_name', $endStationName)?->id;
             $routeDetails = PassengerRegistrationService::getRouteDetails($startStationId, $endStationId);
             $price = PassengerRegistrationService::calculatePrice($routeDetails['distance'], $data["class"], $applicant->ocupation_sector);
+            if($data['ticket_duration'] =="Q"){
+                $price *=3;
+            }
+            
             //payment gateway service goes here 
 
             Payment::create([

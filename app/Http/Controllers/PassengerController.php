@@ -6,6 +6,8 @@ use App\Http\Requests\OnlinePaymentRequest;
 use App\Models\Applicant;
 use App\Models\BarCodeCard;
 use App\Models\Passenger;
+use App\Models\Payment;
+use App\Services\PassengerRegistrationService;
 use Illuminate\Http\Request;
 
 class PassengerController extends Controller
@@ -48,6 +50,10 @@ class PassengerController extends Controller
     if (!$passengerCard) {
         return back()->with('error', 'No barcode card found for this passenger.');
     }
+    $price = PassengerRegistrationService::calculatePrice($passengerCard->route->distance, $data["class"], $passenger->Applicant->ocupation_sector);
+    if($data['ticket_duration'] =="Q"){
+        $price *=3;
+    }
 
     //payment logic goes here.
         $passengerCard->update([
@@ -57,6 +63,14 @@ class PassengerController extends Controller
 
         $passenger->update([
             'status' => 'active',]);
+
+
+        Payment::create([
+            'passenger_id' => $passenger->id,
+            'Amount' => $price,
+            'payment_type' => 'renewal',
+            'payment_mode' => 'Debit'
+        ]);
         
         return $this->redirectWithSuccess('show.passenger.dashboard',"You card has been Renewed");
     }
@@ -87,10 +101,7 @@ class PassengerController extends Controller
             'photo' =>  asset('storage/'.$passenger->applicant->photo),
             'class' => $passenger->BarcodeCard->class,
             'expire_date' =>$passenger->BarCodeCard->expire_date
-
+            
         ]]);
-    }
-
-
-
+    }    
 }

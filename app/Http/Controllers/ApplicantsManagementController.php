@@ -55,12 +55,26 @@ class ApplicantsManagementController extends Controller
         return redirect()->route('show.admin-portal');
     }
 
-    public function reject(Applicant $applicant)
+    public function reject(Applicant $applicant, Request $request)
     {
-        session()->flash('success', 'Applicant Rejected');
-        Mail::to($applicant->email)->send(new RejectedMail());
-        $applicant->delete();
-        session(['activePage' => 'applicant-manager', 'province' => session("province")]);
-        return redirect()->route('show.admin-portal');
+
+        $reasons = $request->input('reasons', []);
+        $otherReason = $request->input('other_reason');
+        if(empty($reasons) && empty($otherReason)){
+            return back()->with('error', 'Please select a Valid Reason.');
+        }
+
+    if (!empty($otherReason)) {
+        $reasons[] = $otherReason;
+    }
+
+    Mail::to($applicant->email)->send(new RejectedMail($applicant, $reasons));
+
+    //Make sure uncomment this once testing ends 
+    $applicant->delete();
+
+    session()->flash('success', 'Applicant Rejected');
+    session(['activePage' => 'applicant-manager', 'province' => session("province")]);
+    return redirect()->route('show.admin-portal');
     }
 }

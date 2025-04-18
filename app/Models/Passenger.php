@@ -31,4 +31,7 @@ class Passenger extends Model
             'route_id'    
         );
 }
+public function Payments(){
+    return $this->hasMany(Payment::class);
+}
 }

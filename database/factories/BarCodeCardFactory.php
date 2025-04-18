@@ -22,11 +22,7 @@ class BarCodeCardFactory extends Factory
         $startDate = now();
         $endDate = $startDate->copy()->addMonths($this->faker->randomElement([1, 3]));
         return [
-            'passenger_id' => Passenger::factory(),
-            'card_config_id' =>CardConfig::factory(), 
-            'Ticket_Duration' => $this->faker->randomElement(["M", "Q"]),
-            'Start_Date' => $startDate,
-            'End_Date' => $endDate
+
         ];
     }
 }

@@ -1,5 +1,5 @@
 <div class="container mx-auto px-4 mt-10">
-    <h2 class="text-2xl font-bold text-[#05445E] mb-6 text-center">Passengers List</h2>
+    <h2 class="text-2xl font-bold text-[#05445E] mb-6 text-center">Revenue List</h2>
 
     @if(session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
@@ -22,14 +22,12 @@
                 @forelse ($payments as $payment)
                     <tr 
                         {{-- onclick="window.location='{{ route('admin.applicants.show', ['passenger' => $passenger->id]) }}'"  --}}
-                        class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150"
-                    >
+                        class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150">
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->id }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->passenger_id}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->Amount }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ucwords($payment->payment_type)}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$payment->payment_date}}</td>
-
                     </tr>
                 @empty
                     <tr>

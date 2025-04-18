@@ -25,8 +25,8 @@ class PassengerRegistrationService
         $pricePerKM = config('ticket.price_per_km');
 
         $class_multiplyer = match($class) {
-            '1st' => 2,
-            '2nd' => 1.5,
+            '1st' => 1.5,
+            '2nd' => 1.2,
             default => 1,
         };
 
