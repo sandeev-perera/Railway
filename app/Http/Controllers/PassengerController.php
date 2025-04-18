@@ -84,7 +84,7 @@ class PassengerController extends Controller
             'sector' => $passenger->applicant->occupation_sector,
             'home_station' => $passenger->applicant->home_station,
             'work_station' =>$passenger->applicant->work_station,
-            'photo' =>  'storage/'.$passenger->applicant->photo,
+            'photo' =>  asset('storage/'.$passenger->applicant->photo),
             'class' => $passenger->BarcodeCard->class,
             'expire_date' =>$passenger->BarCodeCard->expire_date
 

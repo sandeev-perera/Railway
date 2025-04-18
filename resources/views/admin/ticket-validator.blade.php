@@ -24,7 +24,7 @@
 
     <!-- Result Card -->
     <div id="passenger-card" class="hidden bg-white bg-opacity-10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-xl flex flex-col md:flex-row items-center gap-8">
-      <img id="passenger-photo" src="{{ asset('images/user.jpg') }}" alt="Passenger"
+      <img id="passenger-photo" src="" alt="Passenger"
            class="w-36 h-36 rounded-full object-cover border-4 border-white shadow-md" />
 
       <div class="flex-1 space-y-2 text-white text-lg">
@@ -76,8 +76,8 @@
             document.getElementById('ticket-class').textContent = p.class;
             document.getElementById('expire-date').textContent = p.expire_date;
             document.getElementById('passenger-photo').src = p.photo;
-
-            card.classList.remove('hidden');
+            console.log(p.photo);
+            card.classList.remove('hidden');            
           }
         })
         .catch(error => {
