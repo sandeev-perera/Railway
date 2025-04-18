@@ -9,6 +9,7 @@ use App\Models\Station;
 use App\Services\PassengerRegistrationService;
 use Illuminate\Support\Str;
 use App\Http\Requests\OnlinePaymentRequest;
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 
 class RegisterPassenger extends Controller
@@ -25,8 +26,6 @@ class RegisterPassenger extends Controller
                 'passenger_token' => Str::uuid(),
                 'status'=>"active"
             ]);
-
-    
             $passengerID = $passenger->id; 
             $startStationName = $applicant->home_station;
             $endStationName = $applicant->work_station;
@@ -47,6 +46,13 @@ class RegisterPassenger extends Controller
             $price = PassengerRegistrationService::calculatePrice($routeDetails['distance'], $data["class"], $applicant->ocupation_sector);
             //payment gateway service goes here 
 
+            Payment::create([
+                'passenger_id' => $passengerID,
+                'Amount' => $price,
+                'payment_type' => 'registration',
+                'payment_mode' => 'Debit'
+            ]);
+
             //create card for the passenger
             BarCodeCard::create([
                 'passenger_id' => $passengerID,
@@ -58,8 +64,8 @@ class RegisterPassenger extends Controller
             ]);
             
             DB::commit();
-            $user = Applicant::where("id", $applicant->id)->first();
-            session(['role' => "passenger", "passengerID" => $passengerID, "user"=>$user]);
+            // $user = Applicant::where("id", $applicant->id)->first();
+            session(['role' => "passenger", "passengerID" => $passengerID, "user"=>$applicant->id]);
             
             return $this->redirectWithSuccess('show.passenger.dashboard', "You are now a Passenger");
 

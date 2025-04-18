@@ -177,7 +177,6 @@ function loadPage(page) {
 
         if (currentUrl.includes("admin_mgmt")) currentPage = "admin-manager";
         else if (currentUrl.includes("revenue")) currentPage = "revenue-manager";
-        else if (currentUrl.includes("validate_tickets")) currentPage = "ticket-validator";
         else if (currentUrl.includes("applicant_mgmt")) currentPage = "applicant-manager";
         else if (currentUrl.includes("passenger_mgmt")) currentPage = "passenger-manager";
         else if (currentUrl.includes("dashboard")) currentPage = "admin-dashboard";

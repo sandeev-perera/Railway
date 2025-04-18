@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\BarCodeCard;
+use App\Models\Passenger;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,11 +17,13 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id()->from(50000000);
-            $table->foreignId('bar_code_card_id')->nullable()->constrained()->nullOnDelete();            $table->decimal("Amount", 10, 2);
-            $table->timestamp("Payment_Date")->default(DB::raw('CURRENT_DATE'));
-            $table->enum("Payment_Mode",["Debit", "Credit","On Cash"])->default("On Cash");
+            $table->foreignIdFor(Passenger::class)->constrained()->cascadeOnDelete();
+            // $table->foreignId('bar_code_card_id')->nullable()->constrained()->nullOnDelete();            
+            $table->decimal("Amount", 10, 2);
+            $table->enum('payment_type', ['renewal', 'registration', 'fine']);
+            $table->timestamp("payment_date")->default(DB::raw('CURRENT_DATE'));
+            $table->enum("payment_mode",["Debit", "Credit","On Cash"])->default("On Cash");
             $table->timestamps();
-
         });
     }
 

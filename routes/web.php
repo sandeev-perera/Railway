@@ -9,6 +9,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PassengerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterPassenger;
+use App\Livewire\TicketValidator;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::view("/", "index")->name("show.index");
 Route::view("/aboutus","aboutus")->name("show.aboutus");
 Route::view("/support","support")->name("show.support");
+Route::view('/admin/testvalidator','admin.ticket-validator')->name('show.validator');
 
 
 Route::controller(AuthController::class)->group(function(){
@@ -34,6 +36,11 @@ Route::controller(ApplicantController::class)->group(function(){
     Route::put('/passenger/{applicant}/update', 'update')->name('passenger.update');
 
 });
+
+// Route::get('/ticket-validator', TicketValidator::class)->name('ticket.validator');
+// Route::get('/ticket-validator', function () {
+//     return 'route hit!';
+// });
 
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('show.admin-portal');
@@ -60,6 +67,8 @@ Route::prefix('/admin/applications')->controller(ApplicantsManagementController:
     Route::patch('/applicant/{applicant}/approve', 'approve')->name('admin.applications.approve');
     Route::patch('/applicant/{applicant}/reject', 'reject')->name('admin.applications.reject');
 });
+
+Route::post('/fetch-passenger', [PassengerController::class, 'fetchByToken'])->name('fetch.passenger');
 
 
 Route::get('/dashboard', function () {

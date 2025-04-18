@@ -12,8 +12,8 @@ class Payment extends Model
     protected $guarded = [];
 
 
-    public function barCodeCard(){
-        return $this->belongsTo(BarCodeCard::class);
+    public function passenger(){
+        return $this->belongsTo(Passenger::class);
     }
 
 }

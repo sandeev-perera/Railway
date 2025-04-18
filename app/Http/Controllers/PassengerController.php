@@ -6,6 +6,7 @@ use App\Http\Requests\OnlinePaymentRequest;
 use App\Models\Applicant;
 use App\Models\BarCodeCard;
 use App\Models\Passenger;
+use Illuminate\Http\Request;
 
 class PassengerController extends Controller
 {
@@ -59,4 +60,37 @@ class PassengerController extends Controller
         
         return $this->redirectWithSuccess('show.passenger.dashboard',"You card has been Renewed");
     }
+
+    public function fetchByToken(Request $request)
+    {
+    $token = trim($request->token);
+
+    if (strlen($token) !== 36) {
+        return response()->json(['error' => 'Invalid token length'], 400);
+    }
+
+    $passenger = Passenger::where('passenger_token', $token)->first();
+
+    if (!$passenger) {
+        return response()->json(['error' => 'Passenger not found'], 404);
+    }
+
+
+    return response()->json(['passenger' => [
+
+            'id' => $passenger->id,
+            'status' => $passenger->status,
+            'full_name' => $passenger->applicant->full_name,
+            'sector' => $passenger->applicant->occupation_sector,
+            'home_station' => $passenger->applicant->home_station,
+            'work_station' =>$passenger->applicant->work_station,
+            'photo' =>  'storage/'.$passenger->applicant->photo,
+            'class' => $passenger->BarcodeCard->class,
+            'expire_date' =>$passenger->BarCodeCard->expire_date
+
+        ]]);
+    }
+
+
+
 }

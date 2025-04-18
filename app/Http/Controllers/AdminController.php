@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Livewire\TicketValidator;
 use App\Models\Admin;
 use App\Models\Applicant;
 use App\Models\Passenger;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -18,6 +20,9 @@ class AdminController extends Controller
     {
         // List of valid pages to prevent unauthorized access
         $validPages = ['admin-manager', 'applicant-manager', 'passenger-manager', 'revenue-manager', 'ticket-validator', 'admin-dashboard', 'edit-profile'];
+        if (!in_array($page, $validPages)) {
+            return response('Page not foundda', 404);
+        }
 
         if ($page === 'applicant-manager') {
             $province = session('province');
@@ -66,18 +71,30 @@ class AdminController extends Controller
             return view('admin.admin-manager', ['admins' => $admins]);
         }
 
+        if($page == 'revenue-manager'){
+            $payments = Payment::with([
+                'passenger:id',
+            ])->select('id', 'passenger_id', 'payment_type', 'Amount', 'payment_date')->orderBy('payment_date')->get();
+
+            return view('admin.revenue-manager', compact('payments'));
+        }
+
+        if($page=='ticket-validator'){
+            return view('admin.ticket-validator-alpha');
+        }
+
         // Check if the requested page is valid
-        if (in_array($page, $validPages)) {
-            $user = Admin::find(session('user'));
-            if($page == "edit-profile"){
-                $numbers = $user->contacts->keyBy('type');
-                $personal_contact = $numbers['personal']->contact_value ?? '';
-                $lan_contact = $numbers['lan']->contact_value ?? '';
-                $work_contact = $numbers['work']->contact_value ?? '';
-                return view('admin.' . $page,compact('user', 'lan_contact', 'personal_contact', 'work_contact'));
-            }
-            return view('admin.' . $page, compact("user"));
-        }        
-        return response('Page not found', 404);
-    }
+        $user = Admin::find(session('user'));
+        if($page == "edit-profile"){
+            $numbers = $user->contacts->keyBy('type');
+            $personal_contact = $numbers['personal']->contact_value ?? '';
+            $lan_contact = $numbers['lan']->contact_value ?? '';
+            $work_contact = $numbers['work']->contact_value ?? '';
+            return view('admin.' . $page,compact('user', 'lan_contact', 'personal_contact', 'work_contact'));
+        }
+
+
+        return view('admin.' . $page, compact("user"));
+    }        
 }
+
