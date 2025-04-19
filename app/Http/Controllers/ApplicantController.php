@@ -156,7 +156,7 @@ class ApplicantController extends Controller
             $this->storeFile($image, "profileImages", $imagepath);
             $this->storeFile($file, "pdfs", $filepath);
     
-            return $this->redirectWithSuccess('show.index', "Your form has been submitted Successfully.");   
+            return $this->redirectWithSuccess('show.index', "Your application has been received and is now under review.");   
         } 
 
         catch (QueryException $e) {
