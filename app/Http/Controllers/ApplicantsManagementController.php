@@ -72,7 +72,7 @@ class ApplicantsManagementController extends Controller
     Mail::to($applicant->email)->send(new RejectedMail($applicant, $reasons));
 
     //Make sure uncomment this once testing ends 
-    // $applicant->delete();
+    $applicant->delete();
 
     session()->flash('success', 'Applicant Rejected');
     session(['activePage' => 'applicant-manager', 'province' => session("province")]);
