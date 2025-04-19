@@ -30,7 +30,7 @@
       <div class="flex-1 space-y-2 text-white text-lg">
         <h3 id="full-name" class="text-2xl font-bold"></h3>
         <p><span class="font-semibold text-gray-200">Passenger ID:</span> <span id="passenger-id"></span></p>
-        <p><span class="font-semibold text-gray-200">Status:</span> <span id="passenger-status" class="inline-block px-2 py-1 bg-green-500 text-sm rounded-md"></span></p>
+        <p><span class="font-semibold text-gray-200">Status:</span> <span id="passenger-status" class="text-black inline-block px-2 py-1 text-sm rounded-md font-bold"></span></p>
         <p><span class="font-semibold text-gray-200">Sector:</span> <span id="sector"></span></p>
         <p><span class="font-semibold text-gray-200">Home Station:</span> <span id="home-station"></span></p>
         <p><span class="font-semibold text-gray-200">Work Station:</span> <span id="work-station"></span></p>
@@ -67,17 +67,34 @@
           } else {
             errorBox.classList.add('hidden');
             const p = data.passenger;
-            document.getElementById('full-name').textContent = p.full_name;
-            document.getElementById('passenger-id').textContent = p.id;
-            document.getElementById('passenger-status').textContent = p.status;
-            document.getElementById('sector').textContent = p.sector;
-            document.getElementById('home-station').textContent = p.home_station;
-            document.getElementById('work-station').textContent = p.work_station;
-            document.getElementById('ticket-class').textContent = p.class;
-            document.getElementById('expire-date').textContent = p.expire_date;
-            document.getElementById('passenger-photo').src = p.photo;
-            console.log(p.photo);
-            card.classList.remove('hidden');            
+document.getElementById('full-name').textContent = p.full_name;
+document.getElementById('passenger-id').textContent = p.id;
+
+const statusEl = document.getElementById('passenger-status');
+statusEl.textContent = p.status;
+statusEl.classList.remove('bg-green-500', 'bg-yellow-400', 'bg-red-500');
+
+switch (p.status.toLowerCase()) {
+  case 'active':
+    statusEl.classList.add('bg-green-500');
+    break;
+  case 'expired':
+    statusEl.classList.add('bg-yellow-400');
+    break;
+  case 'suspended':
+    statusEl.classList.add('bg-red-500');
+    break;
+  default:
+    statusEl.classList.add('bg-gray-500');
+}
+
+document.getElementById('sector').textContent = p.sector;
+document.getElementById('home-station').textContent = p.home_station;
+document.getElementById('work-station').textContent = p.work_station;
+document.getElementById('ticket-class').textContent = p.class;
+document.getElementById('expire-date').textContent = p.expire_date;
+document.getElementById('passenger-photo').src = p.photo;
+card.classList.remove('hidden');
           }
         })
         .catch(error => {

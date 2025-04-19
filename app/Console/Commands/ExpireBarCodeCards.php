@@ -33,7 +33,7 @@ class ExpireBarCodeCards extends Command
     $expiredCards = BarCodeCard::with('passenger')
         ->where('expire_date', '<', $today)
         ->whereHas('passenger', function ($query) {
-            $query->where('status', '!=', 'Expired');
+            $query->where('status', '==', 'Active');
         })
         ->get();
 
@@ -46,6 +46,5 @@ class ExpireBarCodeCards extends Command
             $count++;
         }
     }
-
     }
 }

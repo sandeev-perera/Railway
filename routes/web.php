@@ -59,6 +59,7 @@ Route::get('/passenger/dashboard', [PassengerController::class, 'showpassenger']
 Route::get('/passenger/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
 Route::post('/passenger/create/{applicant}', [RegisterPassenger::class,'RegisterPassengerWithOnlinePayment'])->name('passenger.register');
 Route::post('/passenger/renew/{passenger}', [PassengerController::class, 'renewPassenger'])->name('passenger.renew');
+Route::patch('/passenger/suspend/{passenger}', [PassengerController::class,'suspendPassenger'])->name('passenger.suspend');
 Route::get('/admin/applicants/page/{province}', [AdminController::class, 'index'])->name('admin.applicant-manager');
 
 Route::prefix('/admin/applications')->controller(ApplicantsManagementController::class)->group(function () {
@@ -67,6 +68,9 @@ Route::prefix('/admin/applications')->controller(ApplicantsManagementController:
     Route::patch('/applicant/{applicant}/approve', 'approve')->name('admin.applications.approve');
     Route::patch('/applicant/{applicant}/reject', 'reject')->name('admin.applications.reject');
 });
+
+Route::get('/admin/passengers/{passenger}', [PassengerController::class, 'fetchByID'])->name('admin.passenger.show');
+
 
 Route::post('/fetch-passenger', [PassengerController::class, 'fetchByToken'])->name('fetch.passenger');
 

@@ -11,6 +11,7 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-[#05445E] text-white">
                 <tr>
+
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Full Name</th>
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Applicant ID</th>
@@ -21,7 +22,7 @@
             <tbody class="divide-y divide-gray-200">
                 @forelse ($passengers as $passenger)
                     <tr 
-                        {{-- onclick="window.location='{{ route('admin.applicants.show', ['passenger' => $passenger->id]) }}'"  --}}
+                        onclick="window.location='{{ route('admin.passenger.show', ['passenger' => $passenger->id]) }}'" 
                         class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150"
                     >
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->id }}</td>

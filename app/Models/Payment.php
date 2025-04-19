@@ -9,7 +9,7 @@ class Payment extends Model
 {
     /** @use HasFactory<\Database\Factories\PaymentFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['id', 'passenger_id', 'created_at'];
 
 
     public function passenger(){

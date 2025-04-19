@@ -9,7 +9,7 @@ class Passenger extends Model
 {
     /** @use HasFactory<\Database\Factories\PassengerFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['id','created_at', 'applicant_id'];
 
 
     public function Applicant(){
@@ -30,8 +30,8 @@ class Passenger extends Model
             'id',               
             'route_id'    
         );
-}
-public function Payments(){
-    return $this->hasMany(Payment::class);
-}
+    }
+    public function Payments(){
+        return $this->hasMany(Payment::class);
+    }
 }

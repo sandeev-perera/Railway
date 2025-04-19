@@ -9,7 +9,7 @@ class Admin extends Model
 {
     /** @use HasFactory<\Database\Factories\AdminFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['id', 'email'];
 
 
     public function applicants()

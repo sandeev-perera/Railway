@@ -9,7 +9,7 @@ class Route extends Model
 {
     /** @use HasFactory<\Database\Factories\RouteFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $timestamps = false;
 
 

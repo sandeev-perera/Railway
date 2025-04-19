@@ -9,7 +9,7 @@ class Station extends Model
 {
     /** @use HasFactory<\Database\Factories\StationFactory> */
     use HasFactory;
-    protected $guarded = [];
+    protected $guarded = ['id'];
     public $timestamps = false;
 
     
