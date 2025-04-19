@@ -49,20 +49,28 @@ class AuthController extends Controller
 
         // Check in Applicant table
         $user = Applicant::where('email', $credentials['email'])->first();
-        if ($user && $user->status =="Approved" && Hash::check($credentials['password'], $user->password)) {
-            // $role = $user->passenger ? "passenger" : "applicant";
-            $passengerID = null;
-            if($user->passenger){
-                $role = "passenger";
-                $passengerID = $user->passenger->id;
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            if($user->status =="Approved"){
+                $passengerID = null;
+                if($user->passenger){
+                    $role = "passenger";
+                    $passengerID = $user->passenger->id;
+                }
+                else{
+                    $role = "applicant"; 
+
+                } 
+                session(['role' => $role, 'user' => $user->id, "passengerID" => $passengerID]);
+                return redirect()->route('show.passenger.dashboard');
             }
             else{
-                $role = "applicant"; 
+                return back()->withErrors(['email' => 'Your application is still under review by the admin.']);
 
-            } 
-            session(['role' => $role, 'user' => $user->id, "passengerID" => $passengerID]);
-            return redirect()->route('show.passenger.dashboard');
+            }
+            // $role = $user->passenger ? "passenger" : "applicant";
+            
         }
+
 
         return back()->withErrors(['email' => 'Invalid credentials']);
     }

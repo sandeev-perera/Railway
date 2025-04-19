@@ -6,7 +6,7 @@
   <title>Ticket Validator</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-[#6ca3aa] text-white flex items-center justify-center px-4 py-10 font-sans">
+<body class="min-h-screen bg-[#05445E] text-white flex items-center justify-center px-4 py-10 font-sans">
 
   <div class="w-full max-w-4xl space-y-8">
 
@@ -29,14 +29,14 @@
 
       <div class="flex-1 space-y-2 text-white text-lg">
         <h3 id="full-name" class="text-2xl font-bold"></h3>
-        <p><span class="font-semibold text-gray-700">Passenger ID:</span> <span id="passenger-id"></span></p>
-        <p><span class="font-semibold text-gray-700">Status:</span> <span id="passenger-status" class="inline-block px-2 py-1 bg-green-500 text-sm rounded-md"></span></p>
-        <p><span class="font-semibold text-gray-700">Sector:</span> <span id="sector"></span></p>
-        <p><span class="font-semibold text-gray-700">Home Station:</span> <span id="home-station"></span></p>
-        <p><span class="font-semibold text-gray-700">Work Station:</span> <span id="work-station"></span></p>
+        <p><span class="font-semibold text-gray-200">Passenger ID:</span> <span id="passenger-id"></span></p>
+        <p><span class="font-semibold text-gray-200">Status:</span> <span id="passenger-status" class="inline-block px-2 py-1 bg-green-500 text-sm rounded-md"></span></p>
+        <p><span class="font-semibold text-gray-200">Sector:</span> <span id="sector"></span></p>
+        <p><span class="font-semibold text-gray-200">Home Station:</span> <span id="home-station"></span></p>
+        <p><span class="font-semibold text-gray-200">Work Station:</span> <span id="work-station"></span></p>
         <hr class="border-white/30 my-2">
-        <p><span class="font-semibold text-gray-700">Ticket Class:</span> <span id="ticket-class" class="text-yellow-300 font-bold"></span></p>
-        <p><span class="font-semibold text-gray-700">Expire Date:</span> <span id="expire-date" class="text-red-600"></span></p>
+        <p><span class="font-semibold text-gray-200">Ticket Class:</span> <span id="ticket-class" class="text-yellow-300 font-bold"></span></p>
+        <p><span class="font-semibold text-gray-200">Expire Date:</span> <span id="expire-date" class="text-red-400"></span></p>
       </div>
     </div>
   </div>

@@ -61,6 +61,7 @@ class ApplicantsManagementController extends Controller
         $reasons = $request->input('reasons', []);
         $otherReason = $request->input('other_reason');
         if(empty($reasons) && empty($otherReason)){
+            // return redirect()->route('admin.applications.show',[$applicant->id])->with('error', 'Please select a valid Reason');
             return back()->with('error', 'Please select a Valid Reason.');
         }
 
@@ -71,7 +72,7 @@ class ApplicantsManagementController extends Controller
     Mail::to($applicant->email)->send(new RejectedMail($applicant, $reasons));
 
     //Make sure uncomment this once testing ends 
-    $applicant->delete();
+    // $applicant->delete();
 
     session()->flash('success', 'Applicant Rejected');
     session(['activePage' => 'applicant-manager', 'province' => session("province")]);
