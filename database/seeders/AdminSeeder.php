@@ -16,8 +16,8 @@ class AdminSeeder extends Seeder
     {
         $admins = [
             // Role ID 1 - System Administrator
-            ['full_name' => 'Nimal Perera', 'admin_role_id' => 1, 'email' => 'admin1@gmail.com',],
-            ['full_name' => 'Sanduni Fernando', 'admin_role_id' => 1, 'email' => 'admin2@gmail.com'],
+            ['full_name' => 'Nimal Perera','Station_id'=> 9 , 'admin_role_id' => 1, 'email' => 'admin1@gmail.com',],
+            ['full_name' => 'Sanduni Fernando', 'Station_id'=> 13 , 'admin_role_id' => 1, 'email' => 'admin2@gmail.com'],
 
             // Eastern Admins
             ['full_name' => 'Kavindi Jayasinghe', 'admin_role_id' => 2, 'email' => 'admineastern@gmail.com'],
@@ -60,17 +60,36 @@ class AdminSeeder extends Seeder
             ['full_name' => 'Sandali Dilhara', 'admin_role_id' => 11, 'email' => 'adminrevenue2@gmail.com'],
 
             // Ticket Validator 
-            ['full_name' => 'Sanjeewa Kumara', 'admin_role_id' => 12, 'email' => 'adminticket@gmail.com'],
-            ['full_name' => 'Thilini Wijeratne', 'admin_role_id' => 12, 'email' => 'adminticket2@gmail.com'],
+            ['full_name' => 'Sanjeewa Kumara',      'Station_id'=> 1,  'admin_role_id' => 12, 'email' => 'adminticket1@gmail.com'],
+        ['full_name' => 'Thilini Wijeratne',    'Station_id'=> 2,  'admin_role_id' => 12, 'email' => 'adminticket2@gmail.com'],
+        ['full_name' => 'Nuwan Perera',         'Station_id'=> 3,  'admin_role_id' => 12, 'email' => 'adminticket3@gmail.com'],
+        ['full_name' => 'Dulani Tharuka',       'Station_id'=> 4,  'admin_role_id' => 12, 'email' => 'adminticket4@gmail.com'],
+        ['full_name' => 'Chaminda Silva',       'Station_id'=> 5,  'admin_role_id' => 12, 'email' => 'adminticket5@gmail.com'],
+        ['full_name' => 'Isuru Madushan',       'Station_id'=> 6,  'admin_role_id' => 12, 'email' => 'adminticket6@gmail.com'],
+        ['full_name' => 'Anusha Rajapaksha',    'Station_id'=> 7,  'admin_role_id' => 12, 'email' => 'adminticket7@gmail.com'],
+        ['full_name' => 'Malith Fernando',      'Station_id'=> 8,  'admin_role_id' => 12, 'email' => 'adminticket8@gmail.com'],
+        ['full_name' => 'Kavindi Dissanayake',  'Station_id'=> 9,  'admin_role_id' => 12, 'email' => 'adminticket9@gmail.com'],
+        ['full_name' => 'Ravindu Jayasuriya',   'Station_id'=> 10, 'admin_role_id' => 12, 'email' => 'adminticket10@gmail.com'],
+        ['full_name' => 'Dinesh Hettiarachchi', 'Station_id'=> 11, 'admin_role_id' => 12, 'email' => 'adminticket11@gmail.com'],
+        ['full_name' => 'Nadeesha Peris',       'Station_id'=> 12, 'admin_role_id' => 12, 'email' => 'adminticket12@gmail.com'],
+        ['full_name' => 'Tharindu Lakshan',     'Station_id'=> 13, 'admin_role_id' => 12, 'email' => 'adminticket13@gmail.com'],
+        ['full_name' => 'Nipuni Ranasinghe',    'Station_id'=> 14, 'admin_role_id' => 12, 'email' => 'adminticket14@gmail.com'],
+        ['full_name' => 'Pubudu Senanayake',    'Station_id'=> 15, 'admin_role_id' => 12, 'email' => 'adminticket15@gmail.com'],
+        ['full_name' => 'Hiruni Jayawardena',   'Station_id'=> 16, 'admin_role_id' => 12, 'email' => 'adminticket16@gmail.com'],
+        ['full_name' => 'Sasindu Rathnayake',   'Station_id'=> 17, 'admin_role_id' => 12, 'email' => 'adminticket17@gmail.com'],
+        ['full_name' => 'Manori Ekanayake',     'Station_id'=> 18, 'admin_role_id' => 12, 'email' => 'adminticket18@gmail.com'],
+        ['full_name' => 'Dinuka Abeysekara',    'Station_id'=> 19, 'admin_role_id' => 12, 'email' => 'adminticket19@gmail.com'],
+        ['full_name' => 'Gayanthi Kalubowila',  'Station_id'=> 20, 'admin_role_id' => 12, 'email' => 'adminticket20@gmail.com'],
         ];
 
         foreach ($admins as &$admin) {
-            $admin['Station_id'] = null;
+            if(empty($admin['Station_id'])){
+                $admin['Station_id'] = null;
+            }
             $admin['password'] = bcrypt('1234567');
             $admin['created_at'] = now();
             $admin['updated_at'] = now();
         }
         Admin::insert($admins);
-        // DB::table('admins')->insert($admins);
     }
 }

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id()->from(1000);
-            $table->foreignIdFor(Station::class)->nullable()->constrained()->nullOnDelete();
+            $table->foreignIdFor(Station::class)->default(null)->nullable()->constrained()->nullOnDelete();
             $table->string("full_name");
             $table->foreignIdFor(AdminRole::class)->constrained();
             $table->string("photo")->default("uploads/profileImages/adminimages/setting.png");

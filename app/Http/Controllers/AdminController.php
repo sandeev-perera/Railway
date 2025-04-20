@@ -62,7 +62,7 @@ class AdminController extends Controller
             //retrieve Card Details when Done
             $admins = Admin::with([
                 'adminrole:id,role_name',
-                'station:station_id,station_name'
+                'station:id,station_name'
             ])
             ->select('id', 'full_name', 'email', 'admin_role_id', 'station_id')
             ->orderBy('id', 'asc')->get();

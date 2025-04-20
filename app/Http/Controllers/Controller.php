@@ -44,11 +44,9 @@ abstract class Controller
         $stations = json_decode($jsonarray, true);
         foreach($stations as $station){
             if($station == $stationID){
-                return "Valid";
+                return "VALID";
             }
         }
-        return "Out of Bound";
+        return "OUT OF BOUND";
     }
-
-
 }

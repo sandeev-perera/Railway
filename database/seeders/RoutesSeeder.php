@@ -32,24 +32,6 @@ class RoutesSeeder extends Seeder
         }
 
         Route::insert($routes);
-        // function randomFloat($min, $max, $decimals = 2) {
-        //     $float = $min + mt_rand() / mt_getrandmax() * ($max - $min);
-        //     return round($float, $decimals);
-        // }
-
-        // $stationIds = Station::pluck('id')->toArray();
-        // $routes = [];
-
-        // for($i=0 ; $i < count($stationIds)-1; $i++){
-        //     $start_station_id = $stationIds[$i];
-        //     $end_station_id = $stationIds[$i+1];
-        //     $distance = randomFloat(1,6);
-        //     $routes[] = [
-        //         "start_station_id" => $start_station_id,
-        //         "end_station_id" => $end_station_id,
-        //         "distance" => $distance
-        //     ];
-        // }
-        // Route::insert($routes);
+        
     }
 }
