@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Passenger Details</title>
+    <link rel="shortcut icon" href="{{url('images/train.png')}}" type="image/x-icon">
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
@@ -64,9 +66,41 @@
             </div>
 
             <!-- Source of Proof Document -->
-            <div class="mt-10">
+            <div class="mt-10 mb-10">
                 <span class="font-semibold text-gray-700 block mb-2">Source of Proof:</span>
                 <iframe src="{{ asset('storage/' . $passenger->Applicant->source_of_proof) }}" class="w-full h-96 rounded-lg border border-gray-300" frameborder="0"></iframe>
+            </div>
+
+            <h1 class="text-center text-[#05445E] text-xl font-bold">Payment History</h1>
+
+            <div class="overflow-x-auto bg-white shadow-md rounded-lg mt-3">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-[#05445E] text-white">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Passenger ID</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Amount</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Type</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Payment Date</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        @forelse ($passenger->Payments as $payment)
+                            <tr 
+                                class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150">
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->id }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->passenger_id}}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->Amount }}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{ucwords($payment->payment_type)}}</td>
+                                <td class="px-6 py-4 text-sm text-gray-900">{{$payment->created_at}}</td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">No Payments found</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
             </div>
 
             <!-- Approve Button -->

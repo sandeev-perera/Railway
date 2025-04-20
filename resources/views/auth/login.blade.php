@@ -63,6 +63,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="{{url('images/train.png')}}" type="image/x-icon">
+
     <title>Tap & Go | Login</title>
 </head>
 <body class="min-h-screen bg-cover bg-center bg-no-repeat" style="background-image: url('images/ninearc.jpg');">

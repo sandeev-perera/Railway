@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Season Ticket Portal</title>
+    <link rel="shortcut icon" href="{{url('images/train.png')}}" type="image/x-icon">
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
 </head>
