@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ticket Validator</title>
   <link rel="shortcut icon" href="{{url('images/train.png')}}" type="image/x-icon">
+  @vite(['resources/css/app.css', 'resources/js/app.js'])   
 
-  <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 <body class="min-h-screen bg-[#05445E] text-white flex items-center justify-center px-4 py-10 font-sans">
 
