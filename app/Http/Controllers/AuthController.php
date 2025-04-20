@@ -43,7 +43,14 @@ class AuthController extends Controller
         $admin = Admin::with('adminrole')->where('email', $credentials['email'])->first();        
         if ($admin && Hash::check($credentials['password'], $admin->password)) {
             $provice = $this->getProvince($admin->admin_role_id);
-            session(['role' => 'admin', 'user' => $admin->id, "province" => $provice, "roleID" =>  $admin->admin_role_id,  'role_name' => $admin->adminrole->role_name]);
+            if(empty($admin->station_id)){
+                $station = -1;
+            }
+            else{
+                $station = $admin->station_id;
+            }
+
+            session(['role' => 'admin', 'user' => $admin->id, "province" => $provice, "roleID" =>  $admin->admin_role_id,  'role_name' => $admin->adminrole->role_name, 'stationID'=>$station]);
             return redirect()->route('show.admin-portal');
         }
 

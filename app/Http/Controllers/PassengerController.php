@@ -85,7 +85,7 @@ class PassengerController extends Controller
     }
 
 
-    public function fetchByToken(Request $request)
+    public function fetchByToken(Request $request, $stationID =null)
     {
     $token = trim($request->token);
 
@@ -93,7 +93,7 @@ class PassengerController extends Controller
         return response()->json(['error' => 'Invalid token length'], 400);
     }
 
-    $passenger = Passenger::with('Applicant', 'BarcodeCard')->where('passenger_token', $token)->first();
+    $passenger = Passenger::with('Applicant', 'BarcodeCard', 'route')->where('passenger_token', $token)->first();
 
     if (!$passenger) {
         return response()->json(['error' => 'Passenger not found'], 404);
@@ -109,7 +109,8 @@ class PassengerController extends Controller
             'work_station' =>$passenger->Applicant->work_station,
             'photo' =>  asset('storage/'.$passenger->Applicant->photo),
             'class' => $passenger->BarcodeCard->class,
-            'expire_date' =>$passenger->BarCodeCard->expire_date
+            'expire_date' =>$passenger->BarCodeCard->expire_date,
+            'validity' =>$this->getJourneyValidity($passenger->route->allowed_stations, $stationID)
             
         ]]);
     }  

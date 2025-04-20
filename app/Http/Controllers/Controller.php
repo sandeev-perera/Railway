@@ -37,5 +37,18 @@ abstract class Controller
         return redirect()->route($route)->with('error', $errorMessage);
     }
 
+    protected function getJourneyValidity($jsonarray, $stationID=-1){
+        if($stationID == -1){
+            return "-";
+        }
+        $stations = json_decode($jsonarray, true);
+        foreach($stations as $station){
+            if($station == $stationID){
+                return "Valid";
+            }
+        }
+        return "Out of Bound";
+    }
+
 
 }

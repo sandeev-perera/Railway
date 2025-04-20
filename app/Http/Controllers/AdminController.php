@@ -74,7 +74,7 @@ class AdminController extends Controller
         if($page == 'revenue-manager'){
             $payments = Payment::with([
                 'passenger:id',
-            ])->select('id', 'passenger_id', 'payment_type', 'Amount', 'payment_date')->orderBy('payment_date', 'desc')->get();
+            ])->select('id', 'passenger_id', 'payment_type', 'Amount', 'created_at')->orderBy('created_at', 'desc')->get();
 
             return view('admin.revenue-manager', compact('payments'));
         }

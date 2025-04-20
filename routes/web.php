@@ -72,7 +72,7 @@ Route::prefix('/admin/applications')->controller(ApplicantsManagementController:
 Route::get('/admin/passengers/{passenger}', [PassengerController::class, 'fetchByID'])->name('admin.passenger.show');
 
 
-Route::post('/fetch-passenger', [PassengerController::class, 'fetchByToken'])->name('fetch.passenger');
+Route::post('/fetch-passenger/{station_id}', [PassengerController::class, 'fetchByToken'])->name('fetch.passenger');
 
 
 Route::get('/dashboard', function () {

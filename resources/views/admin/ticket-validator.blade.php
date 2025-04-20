@@ -34,6 +34,8 @@
         <p><span class="font-semibold text-gray-200">Sector:</span> <span id="sector"></span></p>
         <p><span class="font-semibold text-gray-200">Home Station:</span> <span id="home-station"></span></p>
         <p><span class="font-semibold text-gray-200">Work Station:</span> <span id="work-station"></span></p>
+        <p><span class="font-semibold text-gray-200">Journey Validity:</span> <span id="validity"></span></p>
+
         <hr class="border-white/30 my-2">
         <p><span class="font-semibold text-gray-200">Ticket Class:</span> <span id="ticket-class" class="text-yellow-300 font-bold"></span></p>
         <p><span class="font-semibold text-gray-200">Expire Date:</span> <span id="expire-date" class="text-red-400"></span></p>
@@ -50,7 +52,7 @@
       const token = this.value.trim();
 
       if (token.length === 36) {
-        fetch('{{ route("fetch.passenger") }}', {
+        fetch('{{ route("fetch.passenger", ["station_id" =>session('stationID')]) }}', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -94,6 +96,7 @@ document.getElementById('work-station').textContent = p.work_station;
 document.getElementById('ticket-class').textContent = p.class;
 document.getElementById('expire-date').textContent = p.expire_date;
 document.getElementById('passenger-photo').src = p.photo;
+document.getElementById('validity').textContent = p.validity;
 card.classList.remove('hidden');
           }
         })

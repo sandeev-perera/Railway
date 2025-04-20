@@ -6,7 +6,6 @@ use App\Mail\RejectedMail;
 use App\Models\Applicant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class ApplicantsManagementController extends Controller
 {

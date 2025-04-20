@@ -163,7 +163,7 @@ class ApplicantController extends Controller
             if ($e->getCode() == 23000) {
                 return $this->redirectWithError($this->route, 'Duplicate entry! Please check your email or NIC.');
             }
-            return $this->redirectWithError($this->route, 'Database Error This');
+            return $this->redirectWithError($this->route, 'We encountered a Database Error');
         } 
 
         catch (\Exception $e) {

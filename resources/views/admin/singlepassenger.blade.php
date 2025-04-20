@@ -72,7 +72,7 @@
             <!-- Approve Button -->
            
 
-            @if ($passenger->status == "Active")
+            @if ($passenger->status != "Suspended")
             <x-suspend-passenger />
             @endif
             <!-- Hidden checkbox trigger -->
@@ -116,6 +116,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

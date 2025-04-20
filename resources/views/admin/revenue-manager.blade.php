@@ -27,7 +27,7 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->passenger_id}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $payment->Amount }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ucwords($payment->payment_type)}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{$payment->payment_date}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900">{{$payment->created_at}}</td>
                     </tr>
                 @empty
                     <tr>
