@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     {
         $admins = [
             // Role ID 1 - System Administrator
-            ['full_name' => 'Nimal Perera', 'admin_role_id' => 1, 'email' => 'admin1@gmail.com'],
+            ['full_name' => 'Nimal Perera', 'admin_role_id' => 1, 'email' => 'admin1@gmail.com',],
             ['full_name' => 'Sanduni Fernando', 'admin_role_id' => 1, 'email' => 'admin2@gmail.com'],
 
             // Eastern Admins

@@ -9,7 +9,7 @@ class BarCodeCard extends Model
 {
     /** @use HasFactory<\Database\Factories\BarCodeCardFactory> */
     use HasFactory;
-    protected $guarded = ['id', 'passenger_id', 'created_at'];
+    protected $guarded = [];
 
     public function passenger(){
         return $this->belongsTo(Passenger::class);

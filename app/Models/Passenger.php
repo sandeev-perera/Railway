@@ -9,7 +9,7 @@ class Passenger extends Model
 {
     /** @use HasFactory<\Database\Factories\PassengerFactory> */
     use HasFactory;
-    protected $guarded = ['id','created_at', 'applicant_id'];
+    protected $guarded = [];
 
 
     public function Applicant(){

@@ -27,13 +27,13 @@ class ExpireBarCodeCards extends Command
      */
     public function handle()
     {
-        $today = Carbon::today();
+        $today = now()->toDateString();
 
     // Get all barcode cards that expired and whose passenger is still "active"
     $expiredCards = BarCodeCard::with('passenger')
         ->where('expire_date', '<', $today)
         ->whereHas('passenger', function ($query) {
-            $query->where('status', '==', 'Active');
+            $query->where('status', "=",'Active');
         })
         ->get();
 
