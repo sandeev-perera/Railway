@@ -50,10 +50,19 @@
         <!-- Close Button -->
         <div class="close-icon" onclick="toggleMenu()">✖</div>
         <ul class="nav-links-mobile">
-            <li><a href="index" onclick="toggleMenu()">Home</a></li>
-            <li><a href="aboutus" onclick="toggleMenu()">About Us</a></li>
-            <li><a href="support" onclick="toggleMenu()">Support</a></li>
-            <li><a href="#" class="login" onclick="toggleMenu()">Login</a></li>
+            <li><a href="{{route("show.index")}}" onclick="toggleMenu()">Home</a></li>
+            <li><a href="{{route("show.aboutus")}}" onclick="toggleMenu()">About Us</a></li>
+            <li><a href="{{route("show.support")}}" onclick="toggleMenu()">Support</a></li>
+            {{-- <li><a href="{{route()}}" class="login" onclick="toggleMenu()">Login</a></li> --}}
+            @if (session()->has("role"))
+            @if (in_array(session("role"), ['applicant', 'passenger']))
+               <li><a href="{{route('show.passenger.dashboard')}}" class="login" onclick="toggleMenu()">User Dashboard</a></li>
+               @elseif (session("role")== "admin")
+               <li><a href="{{route('show.admin-portal')}}" class="login" onclick="toggleMenu()">Admin Dashboard</a></li>
+               @endif
+           @else
+           <li><a href="{{route("show.login")}}" class="login" onclick="toggleMenu()">Login</a></li>
+           @endif
         </ul>
     </div>
 </body>

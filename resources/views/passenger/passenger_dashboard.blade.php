@@ -56,7 +56,12 @@
             <nav class="mt-25 text-center">
                 <ul>
                     <li class="p-4"><a href="#" class="block sidebar-link" data-page="dashboard">Dashboard</a></li>
-                    <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li>
+
+                    @if ($user->passenger->status == "Expired")
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>                   
+                    @endif
+
+                    {{-- <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="renew_ticket">Renew Ticket</a></li> --}}
                     <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="view_ticket">View Ticket</a></li>
                     <li class="p-4 hover:bg-[#189AB4]"><a href="#" class="sidebar-link" data-page="cancel_season">Cancel Season</a></li>
                 </ul>
@@ -238,11 +243,5 @@ function loadPage(page) {
         }
     });
 </script>
-
-
-
-
-
-
 </body>
 </html>
