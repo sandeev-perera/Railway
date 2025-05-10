@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applicant;
-use App\Models\Contact;
 use App\Models\Station;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
@@ -75,9 +74,9 @@ class ApplicantController extends Controller
         return [
             'full_name' => 'required|string|max:255',
             'nic' => 'required|string|max:13',
-            'gender' => 'required|string',
+            'gender' => 'required',Rule::in(["Male", "Female"]),
             'date_of_birth' => ['required', 'date', 'before_or_equal:' . now()->subYears(18)->format('Y-m-d')] ,
-            'address' => 'required|string|max:50',       
+            'address' => 'required|string|max:150',       
             'district' => ['required', Rule::in([
                 'Ampara', 'Anuradhapura', 'Badulla', 'Batticaloa', 'Colombo', 'Galle', 'Gampaha',
                 'Hambantota', 'Jaffna', 'Kalutara', 'Kandy', 'Kegalle', 'Kilinochchi', 'Kurunegala',
@@ -86,9 +85,9 @@ class ApplicantController extends Controller
             ])],                    
             'occupation' => 'required|string|max:50',
             'occupation_sector' =>['required' , Rule::in(["GOV", "PVT"])] ,
-            'occupation_address' => 'required|string|max:250',
-            'home_station' => ['required','string','max:50',Rule::in($stationLocations)] ,
-            'work_station' => ['required','string','max:50',Rule::in($stationLocations),'different:home_station'] ,
+            'occupation_address' => 'required|string|max:150',
+            'home_station' => ['required','string','max:20',Rule::in($stationLocations)] ,
+            'work_station' => ['required','string','max:20',Rule::in($stationLocations),'different:home_station'] ,
             'photo' => 'required|image|max:2048|mimes:png,jpeg,jpg',
             'source_of_proof' => 'required|mimes:pdf|max:2048',
             'email' => 'required|email|unique:applicants',

@@ -21,23 +21,22 @@ class ApplicantsManagementController extends Controller
         }
     
         if ($province === 'all') {
-            $pendingApplicants = Applicant::where('status', 'Pending')
-                ->select(['id', 'full_name', 'district', 'created_at'])
-                ->orderBy('created_at', 'asc')
-                ->simplePaginate(30);
+            $applicants = Applicant::where('status', 'Pending')
+                ->select(['id', 'full_name', 'district'])
+                ->orderBy('created_at', 'asc')->get();
         } else {
 
-            $pendingApplicants = Applicant::where('status', 'Pending')
+            $applicants = Applicant::where('status', 'Pending')
                 ->where('province', $province)
-                ->select(['id', 'full_name', 'district', 'created_at'])
+                ->select(['id', 'full_name', 'district'])
                 ->orderBy('created_at', 'asc')
-                ->simplePaginate(30);
+                ->get();
         }
 
 
-        return view('admin.applicant-manager', ["applicants" =>$pendingApplicants]);
+        return view('admin.applicant-manager', compact("applicants" ));
     }
-
+    
     public function show(Applicant $applicant) {
         return view("admin.singleapplicant", ["applicant" => $applicant]);
     }

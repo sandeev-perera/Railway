@@ -13,6 +13,7 @@ class AdminController extends Controller
 {
     public function index(){
         $user = Admin::find(session('user'));
+
         return view("admin.admin-portal", compact('user'));
     }
 
@@ -42,7 +43,7 @@ class AdminController extends Controller
             }
             
             $applicants = $query->select(['id', 'full_name', 'district', 'created_at'])
-                                ->orderBy('created_at', 'asc')->get();
+                                ->orderBy('created_at', 'desc')->get();
                                 //->simplePaginate(30);
     
             return view('admin.applicant-manager', ['applicants' => $applicants]);

@@ -21,19 +21,11 @@
                 @forelse ($admins as $admin)
                     <tr 
                         {{-- onclick="window.location='{{ route('admin.applicants.show', ['passenger' => $passenger->id]) }}'"  --}}
-                        class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150"
-                    >
+                        class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150">
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->id }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->full_name}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $admin->adminrole->role_name}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ optional($admin->station)->station_name ?? 'Not Assigned' }}</td>
-
-                        {{-- <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->created_at }}</td> --}}
-                        {{-- <td class="px-6 py-4">
-                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                                Pending
-                            </span>
-                        </td> --}}
                     </tr>
                 @empty
                     <tr>

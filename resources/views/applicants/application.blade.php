@@ -4,7 +4,6 @@
 
 @section('bg_image', url('images/support.jpg'))
 @section("title", "Tap & Go | Application")
-
 @section('content')
 <div class="containe form-section">
     <h2 class="mb-4">Applicant Registration Form</h2>
@@ -20,6 +19,54 @@
             @endforeach
         </ul>
     @endif
+
+    <div style="border-left: 5px solid #f0ad4e; background-color: #fff8e1; padding: 20px; margin-bottom: 30px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.05);">
+        <h3 style="margin-top: 0; margin-bottom: 15px; color: #a26c00; font-size: 20px;">
+            📄 Season Ticket Registration – Proof Document Guidelines
+        </h3>
+    
+        <p style="font-size: 14px; color: #444;">
+            To apply for a season ticket, you must upload a document that proves your reason for travel. This document must be 
+            <strong>certified by a recognized official</strong>. Here's what you need based on your situation:
+        </p>
+    
+        <ul style="list-style: none; padding-left: 0; font-size: 14px; color: #333; margin-top: 15px; margin-bottom: 25px;">
+            <li style="margin-bottom: 20px;">
+                ✅ <strong>If you are a School Student:</strong> Submit a letter certified by your 
+                <strong>school principal</strong> or area <strong>Grama Niladhari</strong>.
+            </li>
+            <li style="margin-bottom: 20px;">
+                ✅ <strong>If you work in the Government Sector:</strong> Submit an employment letter certified by a 
+                <strong>senior officer</strong> or <strong>HR department</strong>.
+            </li>
+            <li style="margin-bottom: 20px;">
+                ✅ <strong>If you work in the Private Sector:</strong> Submit a letter certified by a 
+                <strong>manager</strong>, <strong>department head</strong>, or <strong>HR department</strong>.
+            </li>
+            <li style="margin-bottom: 20px;">
+                ✅ <strong>If you are Self-Employed or Others:</strong> Submit a letter from your area 
+                <strong>Grama Niladhari</strong> confirming your identity, address, and reason for regular travel.
+            </li>
+        </ul>
+    
+        <div style="border-top: 1px solid #ddd; padding-top: 12px; margin-top: 20px;">
+            <p style="font-weight: bold; color: #d9534f; margin-bottom: 10px;">⚠ Important Notes</p>
+            <ul style="list-style: disc; padding-left: 20px; font-size: 13px; color: #444; margin: 0;">
+                <li>The document must be <strong>recent</strong> (within the last 3 months).</li>
+                <li>It should have a <strong>clear stamp and signature</strong>.</li>
+                <li><strong>Falsified or unclear documents will lead to rejection.</strong></li>
+                <li>If you need help, visit your <strong>nearest railway station</strong> or 
+                    <strong>contact our support team</strong>.
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+
+    
+      
+      
+    
     <form action="{{ route('application.store') }}" method="POST" enctype="multipart/form-data" class="sticketform">
         @csrf
 
@@ -202,6 +249,6 @@
 <button type="submit" class="s_btn mt-3">Submit</button>
     </form>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
 @endsection
 

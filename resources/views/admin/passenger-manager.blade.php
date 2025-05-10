@@ -11,7 +11,6 @@
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-[#05445E] text-white">
                 <tr>
-
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">ID</th>
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Full Name</th>
                     <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Applicant ID</th>

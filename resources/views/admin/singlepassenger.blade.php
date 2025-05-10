@@ -110,6 +110,18 @@
             @if ($passenger->status != "Suspended")
             <x-suspend-passenger />
             @endif
+
+            @if ($passenger->status == "Suspended")
+            <form method="POST" action="{{ route('passenger.unsuspend', ['passenger' => $passenger->id]) }}" class="space-y-4">
+                @csrf
+                @method('PATCH')
+                {{-- <label for="modal-toggle" >Unsuspend</label> --}}
+                <button type="submit" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 cursor-pointer ml-2 mt-6 inline-block">Unsuspend</button>
+            </form>
+
+            @endif
+
+
             <!-- Hidden checkbox trigger -->
 
 

@@ -8,8 +8,10 @@ use App\Models\Applicant;
 use App\Models\BarCodeCard;
 use App\Models\Passenger;
 use App\Models\Payment;
+use App\Services\JourneyTrackingService;
 use App\Services\PassengerRegistrationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PassengerController extends Controller
@@ -84,23 +86,46 @@ class PassengerController extends Controller
         return view('admin.singlepassenger', ['passenger' => $passenger]);
     }
 
-
-    public function fetchByToken(Request $request, $stationID =null)
+    public function fetchByToken(Request $request, $stationID =-1)
     {
-    $token = trim($request->token);
+        $token = trim($request->token);
+        if (strlen($token) !== 36) {
+            return response()->json(['error' => 'Invalid token length'], 400);
+        }
 
-    if (strlen($token) !== 36) {
-        return response()->json(['error' => 'Invalid token length'], 400);
-    }
+        $passenger = Passenger::with('Applicant', 'BarcodeCard', 'route', 'latestJourney')->where('passenger_token', $token)->first();
+        Log::info($passenger->latestJourney);
+        if (!$passenger) {
+            return response()->json(['error' => 'Passenger not found'], 404);
+        }
 
-    $passenger = Passenger::with('Applicant', 'BarcodeCard', 'route')->where('passenger_token', $token)->first();
+        $validity = $this->getJourneyValidity($passenger->route->allowed_stations, $stationID);
+        $status = "";
+        if($stationID > 0){
+            if($passenger->status == "Active"){
+                if($request->action == "checkin"){
+                    if($validity == "VALID"){
+                        $status = JourneyTrackingService::checkin($passenger, $stationID);
 
-    if (!$passenger) {
-        return response()->json(['error' => 'Passenger not found'], 404);
-    }
+                    }
+                    else if($validity == "OUT OF BOUND"){
 
-    return response()->json(['passenger' => [
+                        $status = "Invalid Journey";
+                    }
+                }
+                else if($request->action =="checkout"){
+                    $status = JourneyTrackingService::checkout($passenger, $stationID, $validity);
+                    
+                }
+            }
+            else{
+                $status = "This Passenger is not active";
+            }
+            
+        }
+        Log::info($status);
 
+        return response()->json(['passenger' => [
             'id' => $passenger->id,
             'status' => $passenger->status,
             'full_name' => $passenger->Applicant->full_name,
@@ -110,11 +135,20 @@ class PassengerController extends Controller
             'photo' =>  asset('storage/'.$passenger->Applicant->photo),
             'class' => $passenger->BarcodeCard->class,
             'expire_date' =>$passenger->BarCodeCard->expire_date,
-            'validity' =>$this->getJourneyValidity($passenger->route->allowed_stations, $stationID)
-            
-        ]]);
+            'validity' =>$validity
+            ], 
+
+            'status'=>$status,
+
+            "latest_journey" =>[
+                "id" => $passenger->latestJourney?->id,
+                "checked_in_station" =>$passenger->latestJourney?->startstation->station_name,
+                "checked_out_station" =>$passenger->latestJourney?->endstation?->station_name,
+                "checked_in_time" => $passenger->latestJourney?->created_at?->format('H:i:s d-m'),
+                "checked_out_time" => $passenger->latestJourney?->checked_out_time?->format('H:i:s d-m')
+            ],
+]);
     }  
-    
     
     public function suspendPassenger(Passenger $passenger, Request $request){
         $reasons = $request->input('reasons', []);
@@ -133,4 +167,17 @@ class PassengerController extends Controller
         Mail::to($passenger->Applicant->email)->send(new SuspendPassenger($passenger, $reasons));
         return back()->with('success', 'Passenger Suspended. Email sent'); 
     }
+
+    public function unsuspendPassenger(Passenger $passenger){
+        if($passenger->BarcodeCard->expire_date < now()){
+            $passenger->update(['status' => 'Expired']);  
+        }
+        else{
+            $passenger->update(['status' => 'Active']);  
+        }
+        return back()->with('success', 'Passenger Unsuspended'); 
+
+    }
+
+
 }

@@ -34,4 +34,12 @@ class Passenger extends Model
     public function Payments(){
         return $this->hasMany(Payment::class);
     }
+
+    public function journeys(){
+        return $this->hasMany(Journey::class);
+    }
+
+    public function latestJourney(){
+        return $this->hasOne(Journey::class)->latestOfMany();
+    }
 }

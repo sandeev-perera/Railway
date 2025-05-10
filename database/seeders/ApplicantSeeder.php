@@ -12,6 +12,9 @@ class ApplicantSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $applicants = [
+
+        ];
+        
     }
 }
