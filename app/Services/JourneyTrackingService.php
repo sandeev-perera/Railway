@@ -34,7 +34,7 @@ class JourneyTrackingService{
             return "This passenger does not have an ongoing journey";
         }
         if($latest_journey->status != "Ongoing"){
-            return "this passenger does not have an Ongoing journey";
+            return "This passenger does not have an Ongoing journey";
         }
 
         $journey_status = "Completed";

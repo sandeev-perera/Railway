@@ -6,12 +6,12 @@ use App\Http\Requests\OnlinePaymentRequest;
 use App\Mail\SuspendPassenger;
 use App\Models\Applicant;
 use App\Models\BarCodeCard;
+use App\Models\Journey;
 use App\Models\Passenger;
 use App\Models\Payment;
 use App\Services\JourneyTrackingService;
 use App\Services\PassengerRegistrationService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PassengerController extends Controller
@@ -29,10 +29,17 @@ class PassengerController extends Controller
     public function loadPage($page)
     {
         // List of valid pages to prevent unauthorized access
-        $validPages = ['dashboard', 'renew_ticket', 'support', 'view_ticket', 'cancel_season', 'edit_profile'];
+        $validPages = ['dashboard', 'renew_ticket', 'support', 'view_ticket', 'cancel_season', 'edit_profile', "passenger_journeys"];
 
         // Check if the requested page is valid
         if (in_array($page, $validPages)) {
+            $journeys = "";
+            if($page== "passenger_journeys"){
+                $journeys = Journey::with([
+                    'startstation:id,station_name',
+                    'endstation:id,station_name',
+                    'passenger'])->where('passenger_id', session('passengerID'))->orderBy('created_at', 'desc')->limit(50)->get();
+            }
             $user = Applicant::with('passenger')->find(session('user'));
             if($page == "edit_profile"){
                 $numbers = $user->contacts->keyBy('type');
@@ -41,7 +48,7 @@ class PassengerController extends Controller
                 $work_contact = $numbers['work']->contact_value ?? '';
                 return view('passenger.' . $page,compact('user', 'lan_contact', 'personal_contact', 'work_contact'));
             }
-            return view('passenger.' . $page,compact('user'));
+            return view('passenger.' . $page,compact('user', 'journeys'));
         }
         
         return response('Page not found', 404);
@@ -81,8 +88,12 @@ class PassengerController extends Controller
 
     public function fetchByID($id)
     {
-        $passenger = Passenger::with(['Applicant', 'Payments', 'BarcodeCard'])->findOrFail($id);
-    
+        $passenger = Passenger::with(['Applicant', 'Payments', 'BarcodeCard', 'journeys' => function ($query) {
+        $query->orderBy('created_at', 'desc');
+    },
+    'journeys.startstation',
+    'journeys.endstation'])->findOrFail($id);
+
         return view('admin.singlepassenger', ['passenger' => $passenger]);
     }
 
@@ -94,7 +105,6 @@ class PassengerController extends Controller
         }
 
         $passenger = Passenger::with('Applicant', 'BarcodeCard', 'route', 'latestJourney')->where('passenger_token', $token)->first();
-        Log::info($passenger->latestJourney);
         if (!$passenger) {
             return response()->json(['error' => 'Passenger not found'], 404);
         }
@@ -123,7 +133,6 @@ class PassengerController extends Controller
             }
             
         }
-        Log::info($status);
 
         return response()->json(['passenger' => [
             'id' => $passenger->id,
@@ -179,5 +188,18 @@ class PassengerController extends Controller
 
     }
 
+
+public function cancelPassenger($applicantID, Request $request)
+{
+    if ($request->confirmation_string === 'CANCEL') {
+        Applicant::destroy($applicantID);
+        return redirect()->route('user.logout')
+            ->with('success', 'You have cancelled your season ticket.');
+    }
+
+
+
+        return $this->redirectWithError('show.passenger.dashboard',"Confirmation failed. Please type CANCEL to proceed.");
+}
 
 }

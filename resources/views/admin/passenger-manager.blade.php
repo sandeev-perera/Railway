@@ -1,3 +1,5 @@
+
+
 <div class="container mx-auto px-4 mt-10">
     <h2 class="text-2xl font-bold text-[#05445E] mb-6 text-center">Passengers List</h2>
 
@@ -20,6 +22,16 @@
             </thead>
             <tbody class="divide-y divide-gray-200">
                 @forelse ($passengers as $passenger)
+                    @php
+    $status = $passenger->status ?? 'unknown';
+
+    $statusClass = match($status) {
+        'Active' => 'bg-green-200',
+        'Expired' => 'bg-yellow-100',
+        'Suspended' => 'bg-red-100',
+        default => 'bg-gray-100'
+    };
+@endphp
                     <tr 
                         onclick="window.location='{{ route('admin.passenger.show', ['passenger' => $passenger->id]) }}'" 
                         class="cursor-pointer hover:bg-[#D4F1F4] transition duration-150"
@@ -28,7 +40,7 @@
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->Applicant->full_name}}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->Applicant->id }}</td>
                         <td class="px-6 py-4 text-sm text-gray-900">{{$passenger->BarcodeCard->id}}</td>
-                        <td class="px-6 py-4 text-sm text-gray-900">{{$passenger->status}}</td>
+                        <td class="px-6 py-4 text-sm text-gray-900 {{$statusClass}}">{{$status}}</td>
 
                         {{-- <td class="px-6 py-4 text-sm text-gray-900">{{ $passenger->created_at }}</td> --}}
                         {{-- <td class="px-6 py-4">
@@ -49,4 +61,11 @@
     <div class="mt-6">
         {{-- {{ $passengers->links() }} --}}
     </div>
+    <script>
+    window.addEventListener("loadPage", function(event) {
+        if (event.persisted) {
+            location.reload();
+        }
+    });
+</script>
 </div>

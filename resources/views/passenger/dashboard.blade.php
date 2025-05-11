@@ -15,6 +15,12 @@
 </div>
 @endif
 
+@if(session('error'))
+<div class="bg-red-100 text-red-900 border-l-4 border-red-600 px-5 py-3 rounded-md mb-5 font-medium max-w-[700px] mx-auto">
+    {{ session('error') }}
+</div>
+@endif
+
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
 
 
@@ -80,32 +86,3 @@
         <p class="text-lg mt-2 font-bold">{{$user->home_station}} - {{$user->work_station}}</p>
     </div>
 </div>
-
-
-
-
-
-{{-- <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-    <!-- Card 1 -->
-    <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
-        <div class="text-2xl">🎫</div>
-        <h3 class="font-bold">Active Tickets</h3>
-        <p class="text-lg mt-2">1</p>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
-        <div class="text-2xl">🔄</div>
-        <h3 class="font-bold">Upcoming Renewals</h3>
-        <p class="text-lg mt-2">14, May</p>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="bg-[#E0F7FA] p-6 shadow-lg rounded-lg text-center">
-        <div class="text-2xl">📍</div>
-        <h3 class="font-bold">Selected Route</h3>
-        <p class="text-lg mt-2 font-bold">Colombo - Kandy</p>
-    </div> --}}
-</div>
-
-

@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id()->from(50000000);
-            $table->foreignIdFor(Passenger::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Passenger::class)->nullable()->constrained()->nullOnDelete();
             // $table->foreignId('bar_code_card_id')->nullable()->constrained()->nullOnDelete();            
             $table->decimal("Amount", 10, 2);
             $table->enum('payment_type', ['renewal', 'registration', 'fine']);

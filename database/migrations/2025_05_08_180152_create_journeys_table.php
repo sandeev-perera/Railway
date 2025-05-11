@@ -14,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('journeys', function (Blueprint $table) {
             $table->id()->from(3000);
-            $table->foreignIdFor(Passenger::class);
+            $table->foreignIdFor(Passenger::class)->nullable()->constrained()->nullOnDelete();
             $table->foreignId('start_station_id')->constrained('stations');    
             $table->foreignId('end_station_id')->nullable()->constrained('stations');
             $table->dateTime('checked_out_time')->nullable();

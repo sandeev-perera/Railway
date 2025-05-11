@@ -27,10 +27,10 @@
                         <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="renew_ticket">Renew Ticket</a></li>                   
                         @endif
                         <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="view_ticket">View Ticket</a></li>
+                        <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="passenger_journeys">My Journeys</a></li>
                         <li class="p-4 hover:bg-[#189AB4]"><a href="" class="sidebar-link block" data-page="cancel_season">Cancel Season</a></li>                   
                     </ul>
                 </nav>
-                       
             @else
             <nav class="mt-6 text-center">
                 <ul>

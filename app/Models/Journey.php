@@ -12,7 +12,7 @@ class Journey extends Model
         ];
 
         public function passenger(){
-           return $this->hasOne(Passenger::class);
+           return $this->belongsTo(Passenger::class);
         }
 
         public function startstation(){

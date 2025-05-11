@@ -27,8 +27,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StationSeeder::class,
             AdminRoleSeeder::class,
-            AdminSeeder::class,
-            RoutesSeeder::class
+            // AdminSeeder::class,
+            RoutesSeeder::class,
+            ApplicantSeeder::class
         ]);
         // AdminRole::factory(10)->create();
         // Contact::factory(10)->create();
