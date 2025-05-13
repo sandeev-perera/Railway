@@ -1,6 +1,7 @@
 <div class="p-6  bg-white rounded-lg shadow-lg">
     <h2 class="text-3xl font-bold text-[#05445E] text-center mb-10 mt-10">Get your Seasonal Ticket</h2>
-    <form class="space-y-4 mt-4" action="{{route('passenger.register', ['applicant' => session("user")])}}" method='post'>
+    <form class="space-y-4 mt-4" action='{{route('show.payment', ["type" => "Registration"])}}' method='get'>
+        {{-- {{route('passenger.register', ['applicant' => session("user")])}}" --}}
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

@@ -11,7 +11,6 @@ class Payment extends Model
     use HasFactory;
     protected $guarded = [];
 
-
     public function passenger(){
         return $this->belongsTo(Passenger::class);
     }

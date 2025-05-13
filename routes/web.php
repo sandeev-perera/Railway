@@ -6,6 +6,7 @@ use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\ApplicantsManagementController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PassengerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\RegisterPassenger;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +43,7 @@ Route::middleware('check.user')->prefix('/passenger')->group(function(){
     Route::get('/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
     Route::get('/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
     Route::post('suspend/{applicantID}', [PassengerController::class, 'cancelPassenger'])->name('cancel.passenger');
-    Route::get("/payment", function(){
-        return view('passenger.payment');
-    });
+    Route::get("/payment/{type}", [PaymentController::class, 'show'])->name('show.payment');
 
 });
 

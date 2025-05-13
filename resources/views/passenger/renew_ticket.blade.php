@@ -1,6 +1,6 @@
 <div class="p-6  bg-white rounded-lg shadow-lg">
     <h2 class="text-3xl font-bold text-[#05445E] text-center mb-10 mt-10">Renew your Seasonal Ticket</h2>
-    <form class="space-y-4 mt-4" action="{{route('passenger.renew', ['passenger' => session('passengerID')])}}" method='post'>
+    <form class="space-y-4 mt-4" action="{{route('show.payment', ["type" => "Renewal"])}}" method='get'>
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>

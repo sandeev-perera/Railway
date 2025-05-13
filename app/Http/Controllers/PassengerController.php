@@ -59,20 +59,14 @@ class PassengerController extends Controller
 
     public function renewPassenger(Passenger $passenger, OnlinePaymentRequest $request){
         $data = $request->validated();
-        $passengerCard = BarCodeCard::wherePassengerId($passenger->id)->first();
-
-    if (!$passengerCard) {
-        return back()->with('error', 'No barcode card found for this passenger.');
-    }
-    $price = PassengerRegistrationService::calculatePrice($passengerCard->route->distance, $data["class"], $passenger->Applicant->ocupation_sector);
+        $passenger = Passenger::with('Applicant', 'BarCodeCard', 'route')->find($passenger->id);
+    $price = PassengerRegistrationService::calculatePrice($passenger->route->distance, $data["class"], $passenger->Applicant->occupation_sector);
     if($data['ticket_duration'] =="Q"){
         $price *=3;
     }
     
-
-
     //payment logic goes here.
-        $passengerCard->update([
+        $passenger->BarcodeCard->update([
             'start_date' => now(),
             'expire_date' => $data["ticket_duration"] == "M"? now()->addMonth(): now()->addMonths(3)
         ]);
@@ -80,9 +74,7 @@ class PassengerController extends Controller
         $passenger->update([
             'status' => 'active',]);
         
-        
-
-
+    
         Payment::create([
             'passenger_id' => $passenger->id,
             'Amount' => $price,
@@ -203,14 +195,14 @@ class PassengerController extends Controller
     }
 
 
-public function cancelPassenger($applicantID, Request $request)
-{
-    if ($request->confirmation_string === 'CANCEL') {
-        Applicant::destroy($applicantID);
-        return redirect()->route('user.logout')
-            ->with('success', 'You have cancelled your season ticket.');
+    public function cancelPassenger($applicantID, Request $request)
+    {
+        if ($request->confirmation_string === 'CANCEL') {
+            Applicant::destroy($applicantID);
+            return redirect()->route('user.logout')
+                ->with('success', 'You have cancelled your season ticket.');
+        }
+            return $this->redirectWithError('show.passenger.dashboard',"Confirmation failed. Please type CANCEL to proceed.");
     }
-        return $this->redirectWithError('show.passenger.dashboard',"Confirmation failed. Please type CANCEL to proceed.");
-}
 
 }

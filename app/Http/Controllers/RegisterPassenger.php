@@ -10,6 +10,7 @@ use App\Services\PassengerRegistrationService;
 use Illuminate\Support\Str;
 use App\Http\Requests\OnlinePaymentRequest;
 use App\Models\Payment;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RegisterPassenger extends Controller
@@ -37,7 +38,7 @@ class RegisterPassenger extends Controller
             $startStationId = $stations->firstWhere('station_name', $startStationName)?->id;
             $endStationId = $stations->firstWhere('station_name', $endStationName)?->id;
             $routeDetails = PassengerRegistrationService::getRouteDetails($startStationId, $endStationId);
-            $price = PassengerRegistrationService::calculatePrice($routeDetails['distance'], $data["class"], $applicant->ocupation_sector);
+            $price = PassengerRegistrationService::calculatePrice($routeDetails['distance'], $data["class"], $applicant->occupation_sector);
             if($data['ticket_duration'] =="Q"){
                 $price *=3;
             }
