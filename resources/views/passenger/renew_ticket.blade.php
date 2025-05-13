@@ -45,22 +45,18 @@
         <div>
             <label class="block font-semibold">Payment Method</label>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                <label class="flex items-center space-x-2 p-2 border border-gray-400 rounded-[15px] hover:bg-[#D4F1F4] cursor-pointer">
+                <label class="flex items-center space-x-2 p-2 border border-gray-400 rounded-[15px]">
                     <img src="{{url('images/visa.png')}}" class="w-6" alt="Visa">
                     <span>Pay with visa</span>
                 </label>
-                <label class="flex items-center space-x-2 p-2 border border-gray-400 rounded-[15px] hover:bg-[#D4F1F4] cursor-pointer">
+                <label class="flex items-center space-x-2 p-2 border border-gray-400 rounded-[15px]">
                     <img src="{{url('images/master_card.png')}}" class="w-6" alt="MasterCard">
                     <span>Pay with master card</span>
-                </label>
-                <label class="flex items-center space-x-2 p-2 border border-gray-400 rounded-[15px] hover:bg-[#D4F1F4] cursor-pointer">
-                    <img src="{{url('images/cash.png')}}" class="w-6" alt="Cash">
-                    <span>Pay with cash</span>
                 </label>
             </div>
         </div>
         <div class="flex space-x-4 ">
-            <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Renew Season Ticket</button>
+            <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Continue</button>
         </div>
     </form>
 </div>

@@ -57,7 +57,7 @@
             </div>
         </div>
 <div class="flex space-x-4 ">
-            <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Buy Season Ticket</button>
+            <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Continue</button>
         </div>
 
     </form>
