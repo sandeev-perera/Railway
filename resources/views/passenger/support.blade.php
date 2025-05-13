@@ -32,7 +32,6 @@
                     <option value="2nd">2nd Class</option>
                     <option value="3rd">3rd Class</option>
                 </select>
-
             </div>
             <div>
                 <label class="block font-semibold">Duration</label>
@@ -59,10 +58,12 @@
                 </label>
             </div>
         </div>
-        <div class="flex space-x-4 ">
+<div class="flex space-x-4 ">
             <button type="submit" class="px-4 py-2 bg-[#05445E] text-white rounded-full cursor-pointer">Buy Season Ticket</button>
         </div>
+
     </form>
 </div>
+
 
 

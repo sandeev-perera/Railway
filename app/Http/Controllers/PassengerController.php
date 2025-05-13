@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OnlinePaymentRequest;
 use App\Mail\SuspendPassenger;
+use App\Mail\UnsuspendPassenger;
 use App\Models\Applicant;
 use App\Models\BarCodeCard;
 use App\Models\Journey;
@@ -12,6 +13,7 @@ use App\Models\Payment;
 use App\Services\JourneyTrackingService;
 use App\Services\PassengerRegistrationService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class PassengerController extends Controller
@@ -28,6 +30,7 @@ class PassengerController extends Controller
 
     public function loadPage($page)
     {
+        Log::info('message');
         // List of valid pages to prevent unauthorized access
         $validPages = ['dashboard', 'renew_ticket', 'support', 'view_ticket', 'cancel_season', 'edit_profile', "passenger_journeys"];
 
@@ -65,6 +68,8 @@ class PassengerController extends Controller
     if($data['ticket_duration'] =="Q"){
         $price *=3;
     }
+    
+
 
     //payment logic goes here.
         $passengerCard->update([
@@ -74,6 +79,8 @@ class PassengerController extends Controller
 
         $passenger->update([
             'status' => 'active',]);
+        
+        
 
 
         Payment::create([
@@ -178,12 +185,19 @@ class PassengerController extends Controller
     }
 
     public function unsuspendPassenger(Passenger $passenger){
+        $sendmail = false;
         if($passenger->BarcodeCard->expire_date < now()){
             $passenger->update(['status' => 'Expired']);  
+            $sendmail = true;
         }
         else{
             $passenger->update(['status' => 'Active']);  
+            $sendmail = true;
         }
+        if($sendmail){
+            Mail::to($passenger->Applicant->email)->send(new UnsuspendPassenger());
+        }
+
         return back()->with('success', 'Passenger Unsuspended'); 
 
     }
@@ -196,9 +210,6 @@ public function cancelPassenger($applicantID, Request $request)
         return redirect()->route('user.logout')
             ->with('success', 'You have cancelled your season ticket.');
     }
-
-
-
         return $this->redirectWithError('show.passenger.dashboard',"Confirmation failed. Please type CANCEL to proceed.");
 }
 

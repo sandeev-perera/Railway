@@ -74,7 +74,7 @@
         mobileMenu.classList.toggle("active");
     }
     </script>
-    <style>
+    {{-- <style>
 .header {
     min-height: 100vh ;
     width: 100%;
@@ -85,5 +85,19 @@
     
 }
 
+    </style> --}}
+    <style>
+    @if (!trim($__env->yieldContent('disable_header')))
+    .header {
+        min-height: 100vh;
+        width: 100%;
+        background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 34, 24, 0.897)), url('@yield('bg_image')');
+        background-position: center;
+        background-size: cover;
+        position: relative;
+    }
+    @endif
     </style>
+
+
 

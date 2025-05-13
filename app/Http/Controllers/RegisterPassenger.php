@@ -21,12 +21,7 @@ class RegisterPassenger extends Controller
             if ($applicant->passenger) {
                 return back()->with('error', 'This applicant is already a registered passenger.');
             }
-            $passenger = Passenger::create([
-                'applicant_id' => $applicant->id,
-                'passenger_token' => Str::uuid(),
-                'status'=>"active"
-            ]);
-            $passengerID = $passenger->id; 
+             
             $startStationName = $applicant->home_station;
             $endStationName = $applicant->work_station;
 
@@ -39,7 +34,6 @@ class RegisterPassenger extends Controller
                 return redirect()->back()->with('error', 'One or both train stations were not found.');
             }
 
-            
             $startStationId = $stations->firstWhere('station_name', $startStationName)?->id;
             $endStationId = $stations->firstWhere('station_name', $endStationName)?->id;
             $routeDetails = PassengerRegistrationService::getRouteDetails($startStationId, $endStationId);
@@ -47,8 +41,17 @@ class RegisterPassenger extends Controller
             if($data['ticket_duration'] =="Q"){
                 $price *=3;
             }
-            
+
             //payment gateway service goes here 
+
+
+            $passenger = Passenger::create([
+                'applicant_id' => $applicant->id,
+                'passenger_token' => Str::uuid(),
+                'status'=>"active"
+            ]);
+            $passengerID = $passenger->id;
+            
 
             Payment::create([
                 'passenger_id' => $passengerID,

@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StationSeeder::class,
             AdminRoleSeeder::class,
-            // AdminSeeder::class,
+            AdminSeeder::class,
             RoutesSeeder::class,
             ApplicantSeeder::class
         ]);

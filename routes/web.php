@@ -42,6 +42,9 @@ Route::middleware('check.user')->prefix('/passenger')->group(function(){
     Route::get('/dashboard', [PassengerController::class, 'showpassenger'])->name('show.passenger.dashboard');
     Route::get('/dashboard/page/{page}', [PassengerController::class, 'loadPage'])->name("passenger.dashboard.page");
     Route::post('suspend/{applicantID}', [PassengerController::class, 'cancelPassenger'])->name('cancel.passenger');
+    Route::get("/payment", function(){
+        return view('passenger.payment');
+    });
 
 });
 
